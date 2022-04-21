@@ -1,1 +1,1 @@
-c,b=game.Players.LocalPlayer,Instance.new'Tool';a,b.Parent,b.RequiresHandle=c:GetMouse(),c.Backpack,false;b.Activated:connect(function()_=a.Hit;c.Character.HumanoidRootPart.CFrame=CFrame.new(_.X,_.Y+3,_.Z)end)
+c,b=game.Players.LocalPlayer,Instance.new'Tool'a,b.Parent,b.RequiresHandle=c:GetMouse(),c.Backpack,false;b.Activated:connect(function()_=a.Hit;c.Character.HumanoidRootPart.CFrame=CFrame.new(_.X,_.Y+3,_.Z)end)
