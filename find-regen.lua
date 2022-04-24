@@ -1,0 +1,1 @@
+_=game.Players.LocalPlayer.Character.HumanoidRootPart;_.Anchored,p=true,_.Position;repeat _.CFrame=CFrame.new(p.X,p.Y+2000,p.Z)until game.Workspace.Terrain._Game.Admin:FindFirstChild"Regen"_.CFrame=game.Workspace.Terrain._Game.Admin.Regen.CFrame;_.Anchored,_,p=false,nil,nil
