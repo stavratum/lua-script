@@ -77,7 +77,7 @@ local Initialize = function(Side)
                 repeat task.wait() until _.AbsolutePosition.Y >= Y
                 if library.flags.AP then
                     game:GetService'VirtualInputManager':SendKeyEvent(true,Enum.KeyCode[Keys[_.Parent.Name]],false,nil)
-                    game:GetService'VirtualInputManager':SendKeyEvent(false,Enum.KeyCode[Keys[_.Parent.Name]],false,nil)
+                    --game:GetService'VirtualInputManager':SendKeyEvent(false,Enum.KeyCode[Keys[_.Parent.Name]],false,nil)
                 end
             end)
         elseif ScrollType(Side)=="Upscroll"then
@@ -85,7 +85,7 @@ local Initialize = function(Side)
                 repeat task.wait() until _.AbsolutePosition.Y <= Y
                 if library.flags.AP then
                     game:GetService'VirtualInputManager':SendKeyEvent(true,Enum.KeyCode[Keys[_.Parent.Name]],false,nil)
-                    game:GetService'VirtualInputManager':SendKeyEvent(false,Enum.KeyCode[Keys[_.Parent.Name]],false,nil)
+                    --game:GetService'VirtualInputManager':SendKeyEvent(false,Enum.KeyCode[Keys[_.Parent.Name]],false,nil)
                 end
             end)
         end
@@ -103,13 +103,13 @@ MainGui.ChildAdded:Connect(function(_)
         repeat wait() until ArrowGui()and Background()
         Initialize(Side())
     end
-    task.spawn(function()
+    --[[task.spawn(function()
         local Object
         Object = MainGui.Bop.ChildAdded:Wait()
         if Object.Name=="ArrowGui"or"Background" then
             Initialize(Side())
         end
-    end)
+    end)]]
 end)
 if ArrowGui()and Background()then
   Initialize(Side())
