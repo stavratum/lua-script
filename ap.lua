@@ -2,6 +2,7 @@
 probably people will skid this shit code but my target is to destroy this game anyways its so ass damn
 I hope someone will make it better than me
 ]]
+local g = "https://discord.gg/QdaJDDvRHN"
 local Notify=function(Title,Text,Duration)game.StarterGui:SetCore("SendNotification",{Title=Title,Text=Text,Duration=Duration or 1})end
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/wally-rblx/uwuware-ui/main/main.lua"))()
 local Window = library:CreateWindow("CoolUI MMM AP")
