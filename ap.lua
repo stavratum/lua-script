@@ -93,7 +93,8 @@ local Initialize = function(Side)
         end
     end
     task.spawn(function()
-        repeat wait() until ArrowGui():FindFirstChild'Title'
+        repeat wait() until ArrowGui()
+            and ArrowGui():FindFirstChild'Title'
         and ArrowGui().Title.Text:find'0:01'
         for i,v in next,Keys do
             game:GetService'VirtualInputManager':SendKeyEvent(false,Enum.KeyCode[v],false,nil)
