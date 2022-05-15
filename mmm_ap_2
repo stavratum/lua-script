@@ -72,7 +72,7 @@ local Initialize = function(Side)
     for i,v in pairs(Arrows.Notes:children())do
         if ScrollType(Side)=="Downscroll"then
             v.ChildAdded:Connect(function(_)
-                repeat task.wait() until _.AbsolutePosition.Y >= Y
+                repeat task.wait() until _.AbsolutePosition.Y >= math.floor(Y)
                 if library.flags.AP and Keys[_.Parent.Name]~=nil then
                     game:GetService'VirtualInputManager':SendKeyEvent(true,Enum.KeyCode[Keys[_.Parent.Name]],false,nil)
                     if #Arrows.LongNotes[_.Parent.Name]:children()==0 then 
@@ -82,7 +82,7 @@ local Initialize = function(Side)
             end)
         elseif ScrollType(Side)=="Upscroll"then
             v.ChildAdded:Connect(function(_)
-                repeat task.wait() until _.AbsolutePosition.Y <= Y
+                repeat task.wait() until _.AbsolutePosition.Y <= math.ceil(Y)
                 if library.flags.AP and Keys[_.Parent.Name]~=nil then
                     game:GetService'VirtualInputManager':SendKeyEvent(true,Enum.KeyCode[Keys[_.Parent.Name]],false,nil)
                     if #Arrows.LongNotes[_.Parent.Name]:children()==0 then 
@@ -95,13 +95,13 @@ local Initialize = function(Side)
     for i,v in pairs(ArrowGui()[Side]:WaitForChild'LongNotes':children())do
         if ScrollType(Side)=="Downscroll"then
             v.ChildAdded:Connect(function(ln)
-                repeat task.wait() until ln.AbsolutePosition.Y-5 >= Y
+                repeat task.wait() until ln.AbsolutePosition.Y-75 >= Y
                 game:GetService'VirtualInputManager':SendKeyEvent(false,Enum.KeyCode[Keys[ln.Parent.Name]],false,nil)
                 ln:Destroy() 
             end)
         elseif ScrollType(Side)=="Upscroll"then 
             v.ChildAdded:Connect(function(ln)
-                repeat task.wait() until ln.AbsolutePosition.Y+5 <= Y
+                repeat task.wait() until ln.AbsolutePosition.Y+75 <= Y
                 game:GetService'VirtualInputManager':SendKeyEvent(false,Enum.KeyCode[Keys[ln.Parent.Name]],false,nil)
                 ln:Destroy() 
             end)
@@ -121,13 +121,6 @@ MainGui.ChildAdded:Connect(function(_)
         repeat wait() until ArrowGui()and Background()
         Initialize(Side())
     end
-    --[[task.spawn(function()
-        local Object
-        Object = MainGui.Bop.ChildAdded:Wait()
-        if Object.Name=="ArrowGui"or"Background" then
-            Initialize(Side())
-        end
-    end)]]
 end)
 if ArrowGui()and Background()then
   Initialize(Side())
