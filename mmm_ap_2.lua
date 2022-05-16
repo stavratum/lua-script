@@ -30,7 +30,7 @@ end
 local Side = function()
     for _,v in next,Background():GetDescendants() do
         if v:FindFirstChild'Username' and v.Username.Text==Client.DisplayName then
-            if v.AbsolutePosition.X < game:GetService'Players'.LocalPlayer.PlayerGui.ScreenGui.AbsoluteSize.X/2 then
+            if v.AbsolutePosition.X < Client.PlayerGui.ScreenGui.AbsoluteSize.X/2 then
               return "Left"
             else
               return "Right"
@@ -56,7 +56,7 @@ local FakeContainer=function(sd)
 end
 local ScrollType = function(Side)
   repeat wait() until FakeContainer(Side)and #FakeContainer(Side):children()>0
-    if FakeContainer(Side):children()[1].AbsolutePosition.Y < 250 then
+    if FakeContainer(Side):children()[1].AbsolutePosition.Y < Client.PlayerGui.ScreenGui.AbsoluteSize.Y/2 then
         return "Upscroll"
     else
         return "Downscroll"
@@ -101,7 +101,7 @@ local Initialize = function(Side)
             end)
         elseif ScrollType(Side)=="Upscroll"then 
             v.ChildAdded:Connect(function(ln)
-                repeat task.wait() until ln.AbsolutePosition.Y+75 <= Y
+                repeat task.wait() until ln.AbsolutePosition.Y <= Y
                 game:GetService'VirtualInputManager':SendKeyEvent(false,Enum.KeyCode[Keys[ln.Parent.Name]],false,nil)
                 ln:Destroy() 
             end)
