@@ -80,7 +80,7 @@ local Initialize = function(Side)
                     end
                 end
             end)
-        elseif ScrollType(Side)=="Upscroll"then
+        else
             v.ChildAdded:Connect(function(_)
                 repeat task.wait() until _.AbsolutePosition.Y <= math.ceil(Y)
                 if library.flags.AP and Keys[_.Parent.Name]~=nil then
@@ -92,7 +92,7 @@ local Initialize = function(Side)
             end)
         end
     end
-    for i,v in pairs(ArrowGui()[Side]:WaitForChild'LongNotes':children())do
+    for i,v in pairs(ArrowGui()[Side].LongNotes:children())do
         if ScrollType(Side)=="Downscroll"then
             v.ChildAdded:Connect(function(ln)
                 repeat task.wait() until ln.AbsolutePosition.Y-75 >= Y
