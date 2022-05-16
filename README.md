@@ -1,4 +1,4 @@
-# Monday Night Misery: Autoplayer 
+# Monday Morning Misery: Autoplayer 
 Best MMM autoplayer out there
 
 Please, join our [Discord](https://discord.gg/3WdU3buEPn) to get whole script.
