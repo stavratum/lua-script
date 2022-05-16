@@ -34,19 +34,10 @@ Controls = { --you have to edit this
     [6] = {Left = "S", Up = "D", Right = "F", Left2 = "J", Down = "K", Right2 = "L"},
     [7] = {Left = "S", Up = "D", Right = "F", Left2 = "J", Down = "K", Right2 = "L", Space = "Space"},
     [8] = {Left = "A", Down = "S", Up = "D", Right = "F", Left2 = "J", Down2 = "K", Up2 = "L", Right2 = "Semicolon"},
-    [9] = {
-        Left = "A",
-        Down = "S",
-        Up = "D",
-        Right = "F",
-        Space = "Space",
-        Left2 = "J",
-        Down2 = "K",
-        Up2 = "L",
-        Right2 = "Semicolon"
-    }
+    [9] = {Left = "A", Down = "S", Up = "D", Right = "F", Space = "Space", Left2 = "J", Down2 = "K", Up2 = "L", Right2 = "Semicolon"}
 }
 ]]
+
 local g = "https://discord.gg/QdaJDDvRHN"
 local Notify=function(Title,Text,Duration)game.StarterGui:SetCore("SendNotification",{Title=Title,Text=Text,Duration=Duration or 1})end
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/wally-rblx/uwuware-ui/main/main.lua"))()
