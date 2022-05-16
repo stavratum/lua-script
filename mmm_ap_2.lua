@@ -99,7 +99,7 @@ local Initialize = function(Side)
                 game:GetService'VirtualInputManager':SendKeyEvent(false,Enum.KeyCode[Keys[ln.Parent.Name]],false,nil)
                 ln:Destroy() 
             end)
-        elseif ScrollType(Side)=="Upscroll"then 
+        else
             v.ChildAdded:Connect(function(ln)
                 repeat task.wait() until ln.AbsolutePosition.Y+75 <= Y
                 game:GetService'VirtualInputManager':SendKeyEvent(false,Enum.KeyCode[Keys[ln.Parent.Name]],false,nil)
