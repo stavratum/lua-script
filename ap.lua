@@ -34,7 +34,7 @@ end
 local Side = function()
     for _,v in next,Background():GetDescendants() do
         if v:FindFirstChild'Username' and v.Username.Text==Client.DisplayName then
-            if v.AbsolutePosition.X < 400 then
+            if v.AbsolutePosition.X < game:GetService'Players'.LocalPlayer.PlayerGui.ScreenGui.AbsoluteSize.X/2 then
               return "Left"
             else
               return "Right"
