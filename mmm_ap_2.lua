@@ -1,3 +1,5 @@
+--no skid pls
+
 local g = "https://discord.gg/QdaJDDvRHN"
 local Notify=function(Title,Text,Duration)game.StarterGui:SetCore("SendNotification",{Title=Title,Text=Text,Duration=Duration or 1})end
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/wally-rblx/uwuware-ui/main/main.lua"))()
