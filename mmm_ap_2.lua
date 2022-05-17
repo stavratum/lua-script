@@ -97,14 +97,16 @@ local Initialize = function(Side)
     for i,v in pairs(ArrowGui()[Side].LongNotes:children())do
         if ScrollType(Side)=="Downscroll"then
             v.ChildAdded:Connect(function(ln)
-                repeat task.wait() until ln.AbsolutePosition.Y-75 >= Y
-                game:GetService'VirtualInputManager':SendKeyEvent(false,Enum.KeyCode[Keys[ln.Parent.Name]],false,nil)
+                local Name = ln.Parent.Name
+                repeat task.wait() until ln.Visible==false
+                game:GetService'VirtualInputManager':SendKeyEvent(false,Enum.KeyCode[Keys[Name]],false,nil)
                 ln:Destroy() 
             end)
         else
             v.ChildAdded:Connect(function(ln)
-                repeat task.wait() until ln.AbsolutePosition.Y <= Y
-                game:GetService'VirtualInputManager':SendKeyEvent(false,Enum.KeyCode[Keys[ln.Parent.Name]],false,nil)
+                local Name = ln.Parent.Name
+                repeat task.wait() until ln.Visible==false
+                game:GetService'VirtualInputManager':SendKeyEvent(false,Enum.KeyCode[Keys[Name]],false,nil)
                 ln:Destroy() 
             end)
         end
