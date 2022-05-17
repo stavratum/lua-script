@@ -103,7 +103,7 @@ local Initialize = function(Side)
             end)
         else
             v.ChildAdded:Connect(function(ln)
-                repeat task.wait() until ln.AbsolutePosition.Y+75 <= Y
+                repeat task.wait() until ln.AbsolutePosition.Y <= Y
                 game:GetService'VirtualInputManager':SendKeyEvent(false,Enum.KeyCode[Keys[ln.Parent.Name]],false,nil)
                 ln:Destroy() 
             end)
