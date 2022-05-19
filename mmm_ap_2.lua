@@ -1,7 +1,7 @@
 --no skid pls
 
-local g = "https://discord.gg/QdaJDDvRHN"
-local Notify=function(Title,Text,Duration)game.StarterGui:SetCore("SendNotification",{Title=Title,Text=Text,Duration=Duration or 1})end --useless XD
+local Discord = "https://discord.gg/QdaJDDvRHN"
+local Notify=function(Title,Text,Duration)game.StarterGui:SetCore("SendNotification",{Title=Title,Text=Text,Duration=Duration or 1})end
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/wally-rblx/uwuware-ui/main/main.lua"))() --OMG IP LOGGER!!!!
 local Window = library:CreateWindow("CoolUI MMM AP")
 Window:AddToggle({text = "Toggle autoplayer", flag = "AP" })
@@ -9,10 +9,10 @@ Window:AddButton({text = "Destroy Gui", callback = function()pcall(function()gam
 Window:AddButton({text = "Copy discord invite",callback=function()
 if setclipboard then
     Notify("Success","Discord invite is in your clipboard")
-    setclipboard(g)
+    setclipboard(Discord)
 else
     Notify("","Exploit doesn't support 'setclipboard', see invite in F9 menu")
-    print("\n\n== DISCORD INVITE ==\n" .. g .. "\n====================")
+    print("\n\n== DISCORD INVITE ==\n" .. Discord .. "\n====================")
 end
 end})
 Window:AddLabel({text = "Autoplayer by lucit#6896"})
@@ -39,30 +39,29 @@ local Side = function()
             end
         end
     end
+    return nil
 end
 local ArrowGui= function()
-  local AG
   for _,v in pairs(MainGui:GetDescendants())do
-    if v.Name == "ArrowGui"then AG=v end
+    if v.Name == "ArrowGui"then return v end
   end
-  return AG
+  return nil
 end
 local FakeContainer=function(sd)
-  if ArrowGui()~=nil and ArrowGui():FindFirstChild(sd) then
+  if ArrowGui() and ArrowGui():FindFirstChild(sd) then
     for i,v in next,ArrowGui()[sd]:GetDescendants()do
       if v.Name=='FakeContainer'then return v end
     end
-  else
-    return nil
   end
+  return nil
 end
 local ScrollType = function(Side)
   repeat wait() until FakeContainer(Side)and #FakeContainer(Side):children()>0
-    if FakeContainer(Side):children()[1].AbsolutePosition.Y < Client.PlayerGui.ScreenGui.AbsoluteSize.Y/2 then
-        return "Upscroll"
-    else
-        return "Downscroll"
-    end
+  if FakeContainer(Side):children()[1].AbsolutePosition.Y < Client.PlayerGui.ScreenGui.AbsoluteSize.Y/2 then
+      return "Upscroll"
+  else
+      return "Downscroll"
+  end
 end
 local Initialize = function(Side)
     repeat wait()until ArrowGui()
@@ -76,7 +75,7 @@ local Initialize = function(Side)
         if ScrollType(Side)=="Downscroll"then
             v.ChildAdded:Connect(function(_)
                 repeat task.wait() until _.AbsolutePosition.Y>=Y
-                if library.flags.AP and Keys[_.Parent.Name]~=nil then
+                if library.flags.AP then
                     game:GetService'VirtualInputManager':SendKeyEvent(true,Enum.KeyCode[Keys[_.Parent.Name]],false,nil)
                     if #Arrows.LongNotes[_.Parent.Name]:children()==0 then 
                         game:GetService'VirtualInputManager':SendKeyEvent(false,Enum.KeyCode[Keys[_.Parent.Name]],false,nil)
