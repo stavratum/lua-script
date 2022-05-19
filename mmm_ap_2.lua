@@ -1,4 +1,4 @@
---no skid pls
+--no skid plz
 
 local Discord = "https://discord.gg/QdaJDDvRHN"
 local Notify=function(Title,Text,Duration)game.StarterGui:SetCore("SendNotification",{Title=Title,Text=Text,Duration=Duration or 1})end
