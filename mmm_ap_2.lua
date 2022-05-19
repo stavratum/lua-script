@@ -1,33 +1,44 @@
---no skid plz
+-- [[
+local Discord = "https://discord.gg/QdaJDDvRHN" --[[ join pwease ]]
+local Client = game:GetService'Players'.LocalPlayer
+local MainGui = Client.PlayerGui.ScreenGui.MainGui
 
-local Discord = "https://discord.gg/QdaJDDvRHN"
-local Notify=function(Title,Text,Duration)game.StarterGui:SetCore("SendNotification",{Title=Title,Text=Text,Duration=Duration or 1})end
-local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/wally-rblx/uwuware-ui/main/main.lua"))() --OMG IP LOGGER!!!!
-local Window = library:CreateWindow("CoolUI MMM AP")
+local Notify = function(Title,Text,Duration)game.StarterGui:SetCore("SendNotification",{Title=Title,Text=Text,Duration=Duration or 1})end
+-- ]]
+
+-- [[
+
+local uwuware = loadstring(game:HttpGet("https://raw.githubusercontent.com/wally-rblx/uwuware-ui/main/main.lua"))() --[[ ip logger ]]
+local Window = uwuware:CreateWindow("CoolUI MMM AP")
+
+--#Toggles
 Window:AddToggle({text = "Toggle autoplayer", flag = "AP" })
+
+--#Buttons
 Window:AddButton({text = "Destroy Gui", callback = function()pcall(function()game:GetService("CoreGui").ScreenGui:Destroy()end)end})
-Window:AddButton({text = "Copy discord invite",callback=function()
-if setclipboard then
-    Notify("Success","Discord invite is in your clipboard")
-    setclipboard(Discord)
-else
-    Notify("","Exploit doesn't support 'setclipboard', see invite in F9 menu")
-    print("\n\n== DISCORD INVITE ==\n" .. Discord .. "\n====================")
-end
+Window:AddButton({text = "Copy discord invite",
+callback=function()
+   if setclipboard then 
+      Notify("Success","Discord invite is in your clipboard")
+      setclipboard(Discord)
+   else
+      Notify("","Exploit doesn't support 'setclipboard', see invite in F9 menu")
+      print("\n\n== DISCORD INVITE ==\n"..Discord.."\n====================")
+   end
 end})
+
+--#Labels
 Window:AddLabel({text = "Autoplayer by lucit#6896"})
 Window:AddLabel({text = "UI and configs by cup#7282"})
 
-library:Init()
+-- ]]
 
-local Client = game:GetService'Players'.LocalPlayer
-local MainGui = Client.PlayerGui.ScreenGui.MainGui
+--#Main functions
 local Background = function()
-  local BG
   for i,v in pairs(MainGui:GetDescendants())do
-    if v.Name == "Background"then BG=v end
+    if v.Name == "Background"then return v end
   end
-  return BG
+  return nil
 end
 local Side = function()
     for _,v in next,Background():GetDescendants() do
@@ -47,23 +58,24 @@ local ArrowGui= function()
   end
   return nil
 end
-local FakeContainer=function(sd)
-  if ArrowGui() and ArrowGui():FindFirstChild(sd) then
-    for i,v in next,ArrowGui()[sd]:GetDescendants()do
+local FakeContainer=function(_)
+  if ArrowGui() and ArrowGui():FindFirstChild(_) then
+    for i,v in next,ArrowGui()[_]:GetDescendants()do
       if v.Name=='FakeContainer'then return v end
     end
   end
   return nil
 end
-local ScrollType = function(Side)
-  repeat wait() until FakeContainer(Side)and #FakeContainer(Side):children()>0
-  if FakeContainer(Side):children()[1].AbsolutePosition.Y < Client.PlayerGui.ScreenGui.AbsoluteSize.Y/2 then
+local ScrollType = function(_)
+  repeat wait() until FakeContainer(_)and #FakeContainer(_):children()>0
+  if FakeContainer(_):children()[1].AbsolutePosition.Y < Client.PlayerGui.ScreenGui.AbsoluteSize.Y/2 then
       return "Upscroll"
   else
       return "Downscroll"
   end
+  return nil
 end
-local Initialize = function(Side)
+local Init = function(Side)
     repeat wait()until ArrowGui()
     local Arrows = ArrowGui():WaitForChild(Side)
     repeat wait()until #Arrows:WaitForChild'Notes':children()>0
@@ -110,12 +122,18 @@ local Initialize = function(Side)
         end
     end
 end
+
+--
+
+library:Init() --initializing ip logger
+
+if ArrowGui()and Background()then
+  Init(Side()) --grabbing btc wallet
+end
+
 MainGui.ChildAdded:Connect(function(_)
     if _.Name == "ArrowGui" then
-        repeat wait() until ArrowGui()and Background()
-        Initialize(Side())
+        repeat wait() until Background()
+        Init(Side())
     end
 end)
-if ArrowGui()and Background()then
-  Initialize(Side())
-end
