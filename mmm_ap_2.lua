@@ -125,7 +125,7 @@ end
 
 --
 
-library:Init() --initializing ip logger
+uwuware:Init() --initializing ip logger
 
 if ArrowGui()and Background()then
   Init(Side()) --grabbing btc wallet
