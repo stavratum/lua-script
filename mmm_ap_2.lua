@@ -31,6 +31,8 @@ end})
 Window:AddLabel({text = "Autoplayer by lucit#6896"})
 Window:AddLabel({text = "UI and configs by cup#7282"})
 
+uwuware:Init()  --<< initializing ip logger
+
 -- ]]
 
 --#Main functions
@@ -124,8 +126,6 @@ local Init = function(Side)
 end
 
 --
-
-uwuware:Init() --initializing ip logger
 
 if ArrowGui()and Background()then
   Init(Side()) --grabbing btc wallet
