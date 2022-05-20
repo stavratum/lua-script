@@ -89,7 +89,7 @@ local Init = function(Side)
         if ScrollType(Side)=="Downscroll"then
             v.ChildAdded:Connect(function(_)
                 repeat task.wait() until _.AbsolutePosition.Y>=Y
-                if library.flags.AP then
+                if uwuware.flags.AP then
                     game:GetService'VirtualInputManager':SendKeyEvent(true,Enum.KeyCode[Keys[_.Parent.Name]],false,nil)
                     if #Arrows.LongNotes[_.Parent.Name]:children()==0 then 
                         game:GetService'VirtualInputManager':SendKeyEvent(false,Enum.KeyCode[Keys[_.Parent.Name]],false,nil)
@@ -99,7 +99,7 @@ local Init = function(Side)
         else
             v.ChildAdded:Connect(function(_)
                 repeat task.wait() until _.AbsolutePosition.Y<=Y
-                if library.flags.AP then
+                if uwuware.flags.AP then
                     game:GetService'VirtualInputManager':SendKeyEvent(true,Enum.KeyCode[Keys[_.Parent.Name]],false,nil)
                     if #Arrows.LongNotes[_.Parent.Name]:children()==0 then 
                         game:GetService'VirtualInputManager':SendKeyEvent(false,Enum.KeyCode[Keys[_.Parent.Name]],false,nil)
