@@ -8,7 +8,7 @@
 ==
 
 ==Credits
- : lucit#6896 (me) = autoplayer
+ : stavratum#6591 (me) = autoplayer
  : cup#7282 = UI and Config, Side detector and Debugging
  : Timjs#no = cares
 ==
@@ -53,7 +53,7 @@ else
     print("\n\n== DISCORD INVITE ==\n" .. g .. "\n====================")
 end
 end})
-Window:AddLabel({text = "Autoplayer by lucit#6896"})
+Window:AddLabel({text = "Autoplayer by stavratum#6591"})
 Window:AddLabel({text = "UI and configs by cup#7282"})
 
 library:Init()
