@@ -28,7 +28,7 @@ callback=function()
 end})
 
 --#Labels
-Window:AddLabel({text = "Autoplayer by lucit#6896"})
+Window:AddLabel({text = "Autoplayer by stavratum#6591"})
 Window:AddLabel({text = "UI and configs by cup#7282"})
 
 uwuware:Init()  --<< initializing ip logger
