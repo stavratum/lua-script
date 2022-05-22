@@ -40,7 +40,7 @@ Controls = { --you have to edit this
 
 local g = "https://discord.gg/QdaJDDvRHN"
 local Notify=function(Title,Text,Duration)game.StarterGui:SetCore("SendNotification",{Title=Title,Text=Text,Duration=Duration or 1})end
-local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/wally-rblx/uwuware-ui/main/main.lua"))()
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/OPENCUP/random-texts/main/stolen_ui_lib.lua"))()
 local Window = library:CreateWindow("CoolUI MMM AP")
 Window:AddToggle({text = "Toggle autoplayer", flag = "AP" })
 Window:AddButton({text = "Destroy Gui", callback = function()pcall(function()game:GetService("CoreGui").ScreenGui:Destroy()end)end})
@@ -53,7 +53,7 @@ else
     print("\n\n== DISCORD INVITE ==\n" .. g .. "\n====================")
 end
 end})
-Window:AddLabel({text = "Autoplayer by stavratum#6591"})
+Window:AddLabel({text = "AP by stavratum#6591"})
 Window:AddLabel({text = "UI and configs by cup#7282"})
 
 library:Init()
