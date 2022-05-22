@@ -9,7 +9,7 @@ local Notify = function(Title,Text,Duration)game.StarterGui:SetCore("SendNotific
 -- [[
 
 local uwuware = loadstring(game:HttpGet("https://raw.githubusercontent.com/OPENCUP/random-texts/main/stolen_ui_lib.lua"))() --[[ ip logger ]]
-local Window = uwuware:CreateWindow("CoolUI MMM AP")
+local Window = uwuware:CreateWindow("CoolUI MMM AP v2")
 
 --#Toggles
 Window:AddToggle({text = "Toggle autoplayer", flag = "AP" })
