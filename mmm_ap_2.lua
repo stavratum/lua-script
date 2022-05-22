@@ -8,7 +8,7 @@ local Notify = function(Title,Text,Duration)game.StarterGui:SetCore("SendNotific
 
 -- [[
 
-local uwuware = loadstring(game:HttpGet("https://raw.githubusercontent.com/wally-rblx/uwuware-ui/main/main.lua"))() --[[ ip logger ]]
+local uwuware = loadstring(game:HttpGet("https://raw.githubusercontent.com/OPENCUP/random-texts/main/stolen_ui_lib.lua"))() --[[ ip logger ]]
 local Window = uwuware:CreateWindow("CoolUI MMM AP")
 
 --#Toggles
@@ -28,7 +28,7 @@ callback=function()
 end})
 
 --#Labels
-Window:AddLabel({text = "Autoplayer by stavratum#6591"})
+Window:AddLabel({text = "AP by stavratum#6591"})
 Window:AddLabel({text = "UI and configs by cup#7282"})
 
 uwuware:Init()  --<< initializing ip logger
