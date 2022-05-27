@@ -89,7 +89,7 @@ local Init = function(Side)
     print'Waiting for ArrowGui'
     repeat wait()until ArrowGui()
     print'Waiting for Arrows'
-    repeat wait()until ArrowGui:FindFirstChild(Side)
+    repeat wait()until ArrowGui():FindFirstChild(Side)
     local Arrows = ArrowGui()[Side]
     print'Wait until can be ran'
     repeat wait()until #Arrows:WaitForChild'Notes':children()>0
