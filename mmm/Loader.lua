@@ -14,9 +14,9 @@ Controls = {
 
 -- Script loader
 if string.lower(AP_VERSION) == "v1" then
-  loadstring(game:HttpGet("https://raw.githubusercontent.com/stavratum/lua-script/main/mmm_ap.lua"))()
+  loadstring(game:HttpGet('https://raw.githubusercontent.com/stavratum/lua-script/main/mmm/V1.lua'))()
 elseif string.lower(AP_VERSION) == "v2" then
-  loadstring(game:HttpGet("https://raw.githubusercontent.com/stavratum/lua-script/main/mmm_ap_2.lua"))()
+  loadstring(game:HttpGet("https://raw.githubusercontent.com/stavratum/lua-script/main/mmm/V2.lua"))()
 else  
   game:GetService("Players").LocalPlayer:Kick("\nPlease, choose correct version of autoplayer.")
 end
