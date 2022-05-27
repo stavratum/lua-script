@@ -3,7 +3,7 @@ local AP_VERSION = "v1"
 
 --// Config your keybinds (table)
 
-Controls = {
+getgenv().Controls = {
     [4] = {Left = "D", Down = "F", Up = "J", Right = "K"}, --//4K
     [5] = {Left = "D", Down = "F", Up = "J", Right = "K", Space = "Space"}, --//5K
     [6] = {Left = "S", Up = "D", Right = "F", Left2 = "J", Down = "K", Right2 = "L"}, --//6K
