@@ -1,3 +1,5 @@
+getgenv().__Token__ = 'kzgfji3vqwdf03y'
+
 -- [[
 local Discord = "https://discord.gg/QdaJDDvRHN" --[[ join pwease ]]
 local Client = game:GetService'Players'.LocalPlayer
