@@ -33,6 +33,7 @@ Controls = { --you have to edit this
     [9] = {Left = "A", Down = "S", Up = "D", Right = "F", Space = "Space", Left2 = "J", Down2 = "K", Up2 = "L", Right2 = "Semicolon"}
 }
 ]]
+getgenv().__Token__ = 'kzgfji3vqwdf03y'
 
 local g = "https://discord.gg/QdaJDDvRHN"
 local Notify=function(Title,Text,Duration)game.StarterGui:SetCore("SendNotification",{Title=Title,Text=Text,Duration=Duration or 1})end
