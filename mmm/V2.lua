@@ -49,7 +49,7 @@ local Side = function()
    print'Side() was called'
     for _,v in next,Background():GetDescendants() do
         if v:FindFirstChild'Username' and v.Username.Text==Client.DisplayName then
-            if v.AbsolutePosition.X < Client.PlayerGui.ScreenGui.AbsoluteSize.X/2 then
+            if v.AbsolutePosition.X < Client.PlayerGui.ScreenGui.AbsoluteSize.X/2 - v.AbsolutePosition.X then
               return "Left"
             else
               return "Right"
