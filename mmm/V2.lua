@@ -1,17 +1,23 @@
-getgenv().__Token__ = 'kzgfji3vqwdf03y'
-
 -- [[
 local Discord = "https://discord.gg/QdaJDDvRHN" --[[ join pwease ]]
 local Client = game:GetService'Players'.LocalPlayer
+
 local MainGui = Client.PlayerGui.ScreenGui.MainGui
+local ScreenSize_X,ScreenSize_Y do
+  for i,v in pairs(game:GetDescendants())do 
+    if v:IsA'Camera'then 
+      ScreenSize_X,ScreenSize_Y = v.ViewportSize.X,v.ViewportSize.Y
+    end
+  end
+end
 
 local Notify = function(Title,Text,Duration)game.StarterGui:SetCore("SendNotification",{Title=Title,Text=Text,Duration=Duration or 1})end
 -- ]]
 
 -- [[
 
-local uwuware = loadstring(game:HttpGet("https://raw.githubusercontent.com/OPENCUP/random-texts/main/stolen_ui_lib.lua"))() --[[ ip logger ]]
-local Window = uwuware:CreateWindow("CoolUI MMM AP v2")
+local uwuware = loadstring(game:HttpGet("https://raw.githubusercontent.com/OPENCUP/random-texts/main/stolen_ui_lib.lua"))()
+local Window = uwuware:CreateWindow('CoolUI MMM AP')
 
 --#Toggles
 Window:AddToggle({text = "Toggle autoplayer", flag = "AP" })
@@ -49,11 +55,12 @@ local Side = function()
    print'Side() was called'
     for _,v in next,Background():GetDescendants() do
         if v:FindFirstChild'Username' and v.Username.Text==Client.DisplayName then
-            if v.AbsolutePosition.X < Client.PlayerGui.ScreenGui.AbsoluteSize.X/2 - v.AbsolutePosition.X then
+            if v.AbsolutePosition.X < ScreenSize_X/2 then
               return "Left"
             else
               return "Right"
             end
+         print(v:FindFirstChild'Username')
         end
     end
     return nil
@@ -124,13 +131,13 @@ local Init = function(Side)
     for i,v in pairs(ArrowGui()[Side].LongNotes:children())do
         if ScrollType(Side)=="Downscroll"then
             v.ChildAdded:Connect(function(sustainNote)
-                repeat task.wait() until sustainNote.Visible==false
+                repeat task.wait() until not sustainNote.Visible
                 game:GetService'VirtualInputManager':SendKeyEvent(false,Enum.KeyCode[Keys[sustainNote.Parent.Name]],false,nil)
                 sustainNote:Destroy() 
             end)
         else
             v.ChildAdded:Connect(function(sustainNote)
-                repeat task.wait() until sustainNote.Visible==false
+                repeat task.wait() until not sustainNote.Visible
                 game:GetService'VirtualInputManager':SendKeyEvent(false,Enum.KeyCode[Keys[sustainNote.Parent.Name]],false,nil)
                 sustainNote:Destroy() 
             end)
