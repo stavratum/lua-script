@@ -116,7 +116,22 @@ local Init = function(Side)
         else
             v.ChildAdded:Connect(function(_)
                 repeat task.wait() until _.AbsolutePosition.Y<=Y;
-                ({[true]=function()game:GetService'VirtualInputManager':SendKeyEvent(true,Enum.KeyCode[Keys[_.Parent.Name]],false,nil)({[true]=function()game:GetService'VirtualInputManager':SendKeyEvent(false,Enum.KeyCode[Keys[_.Parent.Name]],false,nil)end,[false]=function()end})[uwuware.flags.AP]()end,[false]=function()end})[#Arrows.LongNotes[_.Parent.Name]:children()==0]()
+                (
+                    {
+                        [true]=function()
+                            game:GetService'VirtualInputManager':SendKeyEvent(true,Enum.KeyCode[Keys[_.Parent.Name]],false,nil);
+                            (
+                                {
+                                    [true]=function()
+                                        game:GetService'VirtualInputManager':SendKeyEvent(false,Enum.KeyCode[Keys[_.Parent.Name]],false,nil);
+                                    end;
+                                    [false]=function()end;
+                                }
+                            )[uwuware.flags.AP]();
+                        end;
+                        [false]=function()end;
+                    }
+                )[#Arrows.LongNotes[_.Parent.Name]:children()==0]();
             end)
         end
     end
