@@ -127,11 +127,11 @@ local Init = function(Side)
                                     end;
                                     [false]=function()end;
                                 }
-                            )[uwuware.flags.AP]();
+                            )[#Arrows.LongNotes[_.Parent.Name]:children()==0]();
                         end;
                         [false]=function()end;
                     }
-                )[#Arrows.LongNotes[_.Parent.Name]:children()==0]();
+                )[uwuware.flags.AP]();
             end)
         end
     end
