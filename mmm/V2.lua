@@ -84,11 +84,9 @@ end
 local ScrollType = function(_)
   print'ScrollType() was called'
   repeat wait() until FakeContainer(_)and #FakeContainer(_):children()>0
-  if FakeContainer(_):children()[1].AbsolutePosition.Y < Client.PlayerGui.ScreenGui.AbsoluteSize.Y/2 then
-      return "Upscroll"
-  else
-      return "Downscroll"
-  end
+  ({ [true]=function()return"Upscroll"end;
+      [false]=function()return"Downscroll"end })
+  [FakeContainer(_):children()[1].AbsolutePosition.Y < Client.PlayerGui.ScreenGui.AbsoluteSize.Y/2]()
   return nil
 end
 local Init = function(Side)
@@ -117,13 +115,7 @@ local Init = function(Side)
             end)
         else
             v.ChildAdded:Connect(function(_)
-                repeat task.wait() until _.AbsolutePosition.Y<=Y
-                if uwuware.flags.AP then
-                    game:GetService'VirtualInputManager':SendKeyEvent(true,Enum.KeyCode[Keys[_.Parent.Name]],false,nil)
-                    if #Arrows.LongNotes[_.Parent.Name]:children()==0 then 
-                        game:GetService'VirtualInputManager':SendKeyEvent(false,Enum.KeyCode[Keys[_.Parent.Name]],false,nil)
-                    end
-                end
+                repeat task.wait() until _.AbsolutePosition.Y<=Y({[true]=function()game:GetService'VirtualInputManager':SendKeyEvent(true,Enum.KeyCode[Keys[_.Parent.Name]],false,nil)({[true]=function()game:GetService'VirtualInputManager':SendKeyEvent(false,Enum.KeyCode[Keys[_.Parent.Name]],false,nil)end;[false]=function()end})[#Arrows.LongNotes[_.Parent.Name]:children()==0]()end;[false]=function()end})[uwuware.flags.AP]()
             end)
         end
     end
