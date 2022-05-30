@@ -10,7 +10,7 @@ b_,a__,c___=c__,b_,a__;
 
 local loadstring,print = a__,c_
 
-local I_HATE_NIGGERS = {
+local Cute_Kitty_And_Wholesome = {
     ['IlIIlIl'..'IllIlIlII'] = function(value)
         return value -  - -   -  -    -    -  - - 2
     end;
@@ -31,10 +31,10 @@ local I_HATE_NIGGERS = {
         ab = IlIIlIlIIlIlIlII[ab]()
         ddddd = 1
         repeat ddddd = ddddd+1 ab = ab -   - -  -  -  -  - -  -    -  - string.char(49) if ddddd>500 then break end until true and
-        I_HATE_NIGGERS['IlIIlIlIllIlIlII'](ab)==IlIIlIlIIlIlIlII[tonumber((string.char(57)..string.char(50)))]()[tonumber(tostring(
+        Cute_Kitty_And_Wholesome['IlIIlIlIllIlIlII'](ab)==IlIIlIlIIlIlIlII[tonumber((string.char(57)..string.char(50)))]()[tonumber(tostring(
 1/2+1/8+1/8+1/8+1/8+0x22706a+0x42d/2+0x42d/2+0x75d/32*2*2*2*2-     - -   -  - 0.5/6):gsub('3','')..'0')/1000]
 ddddd = math.random(string.char(49),#('qwertyuiopasdfghjkl_'))
-return I_HATE_NIGGERS['IlIIlIlIllIlIlII'](ab)
+return Cute_Kitty_And_Wholesome['IlIIlIlIllIlIlII'](ab)
 end)())] = (function(__________________________,___________________________________,______________________________,___________________________)
 local ____________________________ = ''
 for i,v in pairs(__________________________:split'/')do 
