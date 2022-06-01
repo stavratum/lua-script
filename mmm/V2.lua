@@ -37,14 +37,12 @@ uwuware:Init()  --<< initializing ip logger
 
 --#Main functions
 local Background = function()
-  print'Background() was called'
   for i,v in pairs(MainGui:GetDescendants())do
     if v.Name == "Background"then return v end
   end
   return nil
 end
 local Side = function()
-   print'Side() was called'
     for _,v in next,Background():GetDescendants() do
         if v:FindFirstChild'Username' and v.Username.Text==Client.DisplayName then
             if v.AbsolutePosition.X < Client:GetMouse().ViewSizeX then
@@ -52,20 +50,19 @@ local Side = function()
             else
               return "Right"
             end
-         print(v:FindFirstChild'Username')
+         print('Left Side: '..v.AbsolutePosition.X < Client:GetMouse().ViewSizeX)
+         print(v.AbsolutePosition.X,Client:GetMouse().ViewSizeX)
         end
     end
     return nil
 end
 local ArrowGui= function()
-  print'ArrowGui() was called'
   for _,v in pairs(MainGui:GetDescendants())do
     if v.Name == "ArrowGui"then return v end
   end
   return nil
 end
 local FakeContainer=function(_)
-  print'FakeContainer() was called'
   if ArrowGui() and ArrowGui():FindFirstChild(_) then
     for i,v in next,ArrowGui()[_]:GetDescendants()do
       if v.Name=='FakeContainer'then return v end
@@ -74,7 +71,6 @@ local FakeContainer=function(_)
   return nil
 end
 local ScrollType = function(_)
-  print'ScrollType() was called'
   repeat wait() until FakeContainer(_)and #FakeContainer(_):children()>0
     if FakeContainer(_):children()[1].AbsolutePosition.Y < Client:GetMouse().ViewSizeY/2 then 
         return "Upscroll"
@@ -84,16 +80,11 @@ local ScrollType = function(_)
   return nil
 end
 local Init = function(Side)
-    print'Init() was called'
-    print'Waiting for ArrowGui'
     repeat wait()until ArrowGui()
-    print'Waiting for Arrows'
     repeat wait()until ArrowGui():FindFirstChild(Side)
     local Arrows = ArrowGui()[Side]
-    print'Wait until can be ran'
     repeat wait()until #Arrows:WaitForChild'Notes':children()>0
     repeat wait()until FakeContainer(Side)and Arrows.Notes and #Arrows.Notes:children()>0
-    print'Loading'
     local Keys = _G.Controls[#Arrows.Notes:children()]
     local Y = FakeContainer(Side).Down.AbsolutePosition.Y
     for i,v in pairs(Arrows.Notes:children())do
@@ -129,7 +120,6 @@ local Init = function(Side)
             end)
         end
     end
-   print'Connected first function, connecting the second one'
     for i,v in pairs(ArrowGui()[Side].LongNotes:children())do
         if ScrollType(Side)=="Downscroll"then
             v.ChildAdded:Connect(function(sustainNote)
@@ -145,7 +135,6 @@ local Init = function(Side)
             end)
         end
     end
-   print'Done'
 end
 
 --
