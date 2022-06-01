@@ -1,15 +1,7 @@
 -- [[
 local Discord = "https://discord.gg/QdaJDDvRHN" --[[ join pwease ]]
 local Client = game:GetService'Players'.LocalPlayer
-
 local MainGui = Client.PlayerGui.ScreenGui.MainGui
-local ScreenSize_X,ScreenSize_Y do
-  for i,v in pairs(game:GetDescendants())do 
-    if v:IsA'Camera'then 
-      ScreenSize_X,ScreenSize_Y = v.ViewportSize.X,v.ViewportSize.Y
-    end
-  end
-end
 
 local Notify = function(Title,Text,Duration)game.StarterGui:SetCore("SendNotification",{Title=Title,Text=Text,Duration=Duration or 1})end
 -- ]]
@@ -55,7 +47,7 @@ local Side = function()
    print'Side() was called'
     for _,v in next,Background():GetDescendants() do
         if v:FindFirstChild'Username' and v.Username.Text==Client.DisplayName then
-            if v.AbsolutePosition.X < ScreenSize_X/2 then
+            if v.AbsolutePosition.X < Client:GetMouse().VIewSizeX then
               return "Left"
             else
               return "Right"
@@ -84,9 +76,9 @@ end
 local ScrollType = function(_)
   print'ScrollType() was called'
   repeat wait() until FakeContainer(_)and #FakeContainer(_):children()>0
-  ({ [true]=function()return"Upscroll"end;
-      [false]=function()return"Downscroll"end })
-  [FakeContainer(_):children()[1].AbsolutePosition.Y < Client.PlayerGui.ScreenGui.AbsoluteSize.Y/2]()
+  ({ [false]=function()return"Upscroll"end;
+      [true]=function()return"Downscroll"end })
+  [FakeContainer(_):children()[1].AbsolutePosition.Y < Client:GetMouse().VIewSizeY/2]()
   return nil
 end
 local Init = function(Side)
