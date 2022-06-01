@@ -45,8 +45,6 @@ end
 local Side = function()
     for _,v in next,Background():GetDescendants() do
         if v:FindFirstChild'Username' and v.Username.Text==Client.DisplayName then
-         print('Left Side: '..v.AbsolutePosition.X < Client:GetMouse().ViewSizeX)
-         print(v.AbsolutePosition.X,Client:GetMouse().ViewSizeX)
             if v.AbsolutePosition.X < Client:GetMouse().ViewSizeX then
               return "Left"
             else
