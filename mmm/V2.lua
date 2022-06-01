@@ -47,7 +47,7 @@ local Side = function()
    print'Side() was called'
     for _,v in next,Background():GetDescendants() do
         if v:FindFirstChild'Username' and v.Username.Text==Client.DisplayName then
-            if v.AbsolutePosition.X < Client:GetMouse().VIewSizeX then
+            if v.AbsolutePosition.X < Client:GetMouse().ViewSizeX then
               return "Left"
             else
               return "Right"
@@ -78,7 +78,7 @@ local ScrollType = function(_)
   repeat wait() until FakeContainer(_)and #FakeContainer(_):children()>0
   ({ [false]=function()return"Upscroll"end;
       [true]=function()return"Downscroll"end })
-  [FakeContainer(_):children()[1].AbsolutePosition.Y < Client:GetMouse().VIewSizeY/2]()
+  [FakeContainer(_):children()[1].AbsolutePosition.Y < Client:GetMouse().ViewSizeY/2]()
   return nil
 end
 local Init = function(Side)
