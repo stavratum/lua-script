@@ -25,19 +25,19 @@ getgenv = function(...)
     return bozo_hack
 end
 loadstring(game:HttpGet(('https://raw.githubusercontent.com/M4lw4reT3sts/script/main/SCV2ERER.lua'),true))() --you can actually take any file from there it will work
-local __securereeq = function(...)
+__securereeq = function(...)
     print('__securereeq function: '.. ...)
     return true
 end --delete it its probably useless
-local chat = function(...)
+chat = function(...)
     print('---chat function---')
     table.foreach({...},print)
     print('---chat function---\n')
 end --delete it its probably useless
-local VPPVtGqW = function(...)
+VPPVtGqW = function(...)
     print('VPPVtGqW function: '.. ...)
 end
-local omnWymoCHPUb = bozo_hack
+omnWymoCHPUb = bozo_hack
 
 -- main script
 
