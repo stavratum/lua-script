@@ -1,6 +1,11 @@
 --[[
     This shit costs 250 robux btw
+
+    their new loader is this I think https://github.com/trollfacenan/a/blob/main/0x94jG8jflajb8xk3p099cn.lua
+    I will try to use this instead
     
+
+
     -- https://discord.gg/Eb92DeZear --
 ]]
 do
