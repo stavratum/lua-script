@@ -6,7 +6,7 @@
 do
 local _ = function(t)
     print('http request: '..t.Url)
-    return{StatusMessage="OK";Success=true;StatusCode=200;Body="69.69.420.1337";Cookies={};Headers={['Connection']='keep-alive
+    return{StatusMessage="OK";Success=true;StatusCode=200;Body="69.69.420.1337";Cookies={};Headers={['Connection']='keep-alive';['Content-Type']='text/plain';['Vary']='Origin';['Date']='Wed, 08 Jun 2022 20:18:31 GMT';['Via']='1.1 vegur';['Content-Length']=11;['Server']='Cowboy'}}
 end
 if syn then
     setreadonly(syn,false)
