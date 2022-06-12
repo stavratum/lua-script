@@ -100,6 +100,7 @@ local pn = 2^(n-1)
 return (input % (pn + pn) >= pn) and 1 or 0
 end
 end
+loadstring(game:HttpGet("https://raw.githubusercontent.com/OPENCUP/random-texts/main/stolen_ui_lib.lua"))()
 local function lIlIIIlllIlIIIIlIIIllIlIIIIIlIlIlll(IlIlllllllIllIlIllIlIlllIIIIIlIIlll)
 local index = 1
 local big_endian = false
