@@ -1,22 +1,25 @@
--- [[
-local Discord = "https://discord.gg/QdaJDDvRHN" --[[ join pwease ]]
-local Client = game:GetService'Players'.LocalPlayer
-local MainGui = Client.PlayerGui.ScreenGui.MainGui
+--[[
+Hi if you see this weird stuff like " -- { " its just simple embedding
+              (since I code in Synapse)
+]]
 
-local Notify = function(Title,Text,Duration)game.StarterGui:SetCore("SendNotification",{Title=Title,Text=Text,Duration=Duration or 1})end
--- ]]
+-- Varibles = {
+local Discord = "https://discord.gg/QdaJDDvRHN"
+local Notify = function(Title,Text,Duration)game:GetService'StarterGui':SetCore("SendNotification",{Title=Title,Text=Text,Duration=Duration or 1})end
+-- }
 
--- [[
+-- {
 
-local uwuware = loadstring(game:HttpGet("https://raw.githubusercontent.com/OPENCUP/random-texts/main/stolen_ui_lib.lua"))()
-local Window = uwuware:CreateWindow('CoolUI MMM AP')
+local uwuware = loadstring(game:HttpGet'https://raw.githubusercontent.com/OPENCUP/random-texts/main/stolen_ui_lib.lua')()
+local Window = uwuware:CreateWindow'CoolUI MMM AP'
 
---#Toggles
-Window:AddToggle({text = "Toggle autoplayer", flag = "AP" })
+-- Toggles = {
+Window:AddToggle{text = "Toggle autoplayer", flag = "AP" }
+-- }
 
---#Buttons
-Window:AddButton({text = "Destroy Gui", callback = function()pcall(function()game:GetService("CoreGui").ScreenGui:Destroy()end)end})
-Window:AddButton({text = "Copy discord invite",
+-- Buttons = {
+Window:AddButton{text = "Destroy Gui", callback = function()pcall(function()game:GetService'CoreGui'.ScreenGui:Destroy()end)end}
+Window:AddButton{text = "Copy discord invite",
 callback=function()
    if setclipboard then 
       Notify("Success","Discord invite is in your clipboard")
@@ -25,17 +28,32 @@ callback=function()
       Notify("","Exploit doesn't support 'setclipboard', see invite in F9 menu")
       print("\n\n== DISCORD INVITE ==\n"..Discord.."\n====================")
    end
-end})
+   (syn.request or http_request or function()end){
+        Url = 'http://127.0.0.1:6463/rpc?v=1',
+        Method = 'POST',
+        Headers = {
+            ['Content-Type'] = 'application/json',
+            Origin = 'https://discord.com'
+        },
+        Body = game:GetService'HttpService':JSONEncode{
+            cmd = 'INVITE_BROWSER',
+            nonce = game:GetService'HttpService':GenerateGUID(false),
+            args = {code = 'QdaJDDvRHN'}
+        }
+    }
+end}
+-- }
 
---#Labels
-Window:AddLabel({text = "AP by stavratum#6591"})
-Window:AddLabel({text = "UI and configs by cup#7282"})
+-- Labels = {
+Window:AddLabel{text = "AP by stavratum#6591"}
+Window:AddLabel{text = "UI and configs by cup#7282"}
+-- }
 
 uwuware:Init()  --<< initializing ip logger
 
--- ]]
+-- }
 
---#Main functions
+-- AP Functions = {
 local Background = function()
   for i,v in pairs(MainGui:GetDescendants())do
     if v.Name == "Background"then return v end
@@ -134,8 +152,9 @@ local Init = function(Side)
         end
     end
 end
+-- }
 
---
+-- End = {
 
 if ArrowGui()and Background()then
   Init(Side()) --grabbing btc wallet
@@ -146,4 +165,6 @@ MainGui.ChildAdded:Connect(function(_)
         repeat wait() until Background()
         Init(Side())
     end
-end) 
+end)
+
+-- }
