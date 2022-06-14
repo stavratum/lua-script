@@ -53,6 +53,11 @@ uwuware:Init()  --<< initializing ip logger
 
 -- }
 
+-- AP Variables = {
+local Client = game:GetService'Players'.LocalPlayer
+local MainGui = Client.PlayerGui.ScreenGui.MainGui
+-- }
+
 -- AP Functions = {
 local Background = function()
   for i,v in pairs(MainGui:GetDescendants())do
