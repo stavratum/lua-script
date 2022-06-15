@@ -10,49 +10,46 @@
 ]]
 do
     local _ = function(t) 
-    if not t then error"invalid argument #1 to '?' (table excepted, got no value)"
-    elseif not t.Url then error"Invalid or no 'Url' field specified in request table"
-    end
-    print('syn.request Url:',t.Url)
-    local _ = {}
-    if t.Body then 
-        _ = {
-            url = "http://pornhub.com/";
-            origin = "69.69.1337.000";
-            args = {};
-            files = {};
-            form = {};
-            data = '';
-            headers = {
-                ['Content-Type'] = 'application/x-www-form-urlencoded';
-                ['Syn-Fingerprint'] = 'rip bozo';
-                ['Syn-User-Identifier'] = 'rip bozo';
-                ['User-Agent'] = '';
-                ['X-Amzn-Trace-Id'] = '';
-                ['Content-Length'] = 0;
-                Accept = '*/*';
-                Cookie = '';
-                Host = 'pornhub.com';
-            };
-}
-    end
-    return setmetatable(
-        _,
-        {
-            __index = function(kv,v)
-                print('syn.request __index:',v)
-                return ({
-                    StatusMessage = 'OK';
-                    Success = true;
-                    StatusCode = 200;
-                    Body = [[{"args":{},"data":"","files":{},"form":{},"headers":{"Accept":"*/*","Content-Length":"0","Content-Type":"application/x-www-form-urlencoded","Cookie":"","Host":"pornhub.com","Syn-Fingerprint":"rip bozo","Syn-User-Identifier":"rip bozo","User-Agent":"synx/no","X-Amzn-Trace-Id":"no"},"json":null,"origin": "69.69.1337.000","url":"http://pornhub.com/"}]];
-                    Cookies = {};
-                    Headers = {}
-                })[v]
-            end
+        print('syn.request Url:',t.Url)
+        local b = {}
+        if t.Body then 
+            b = {
+                url = "http://pornhub.com/";
+                origin = "69.69.1337.000";
+                args = {};
+                files = {};
+                form = {};
+                data = '';
+                headers = {
+                    ['Content-Type'] = 'application/x-www-form-urlencoded';
+                    ['Syn-Fingerprint'] = 'rip bozo';
+                    ['Syn-User-Identifier'] = 'rip bozo';
+                    ['User-Agent'] = '';
+                    ['X-Amzn-Trace-Id'] = '';
+                    ['Content-Length'] = 0;
+                    Accept = '*/*';
+                    Cookie = '';
+                    Host = 'pornhub.com';
+                };
         }
-    )
-end
+        end
+        return setmetatable(
+            b,
+            {
+                __index = function(kv,v)
+                    print('syn.request __index:',v)
+                    return ({
+                        StatusMessage = 'OK';
+                        Success = true;
+                        StatusCode = 200;
+                        Body = [[{"args":{},"data":"","files":{},"form":{},"headers":{"Accept":"*/*","Content-Length":"0","Content-Type":"application/x-www-form-urlencoded","Cookie":"","Host":"pornhub.com","Syn-Fingerprint":"rip bozo","Syn-User-Identifier":"rip bozo","User-Agent":"synx/no","X-Amzn-Trace-Id":"no"},"json":null,"origin": "69.69.1337.000","url":"http://pornhub.com/"}]];
+                        Cookies = {};
+                        Headers = {}
+                    })[v]
+                end
+            }
+        )
+    end
     if syn then
         setreadonly(syn,false)
         syn.request = _
