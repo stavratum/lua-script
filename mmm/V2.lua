@@ -119,7 +119,7 @@ local Init = function(Side)
         if ScrollType(Side)=="Downscroll"then
         print'if'
             v.ChildAdded:Connect(function(_)
-                print("Waiting until ".._.AbsolutePosition.Y.." >= ".. Y .." uwuware.flags.ap: "..uwuware.flags.AP)
+                print("Waiting until "..tostring(_.AbsolutePosition.Y).." >= ".. tostring(Y) .." uwuware.flags.ap: "..tostring(uwuware.flags.AP))
                 repeat task.wait() until _.AbsolutePosition.Y>=Y
                 if uwuware.flags.AP then
                     game:GetService'VirtualInputManager':SendKeyEvent(true,Enum.KeyCode[Keys[_.Parent.Name]],false,nil)
@@ -131,7 +131,7 @@ local Init = function(Side)
         else
           print'else'
             v.ChildAdded:Connect(function(_)
-                print("Waiting until ".._.AbsolutePosition.Y.." <= ".. Y .." uwuware.flags.ap: "..uwuware.flags.AP)
+                print("Waiting until "..tostring(_.AbsolutePosition.Y).." <= ".. tostring(Y) .." uwuware.flags.ap: "..tostring(uwuware.flags.AP))
                 repeat task.wait() until _.AbsolutePosition.Y<=Y
                 if uwuware.flags.AP then
                     game:GetService'VirtualInputManager':SendKeyEvent(true,Enum.KeyCode[Keys[_.Parent.Name]],false,nil)
