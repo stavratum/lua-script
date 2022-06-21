@@ -102,10 +102,14 @@ local ScrollType = function(_)
 end
 local Init = function(Side)
     repeat wait()until ArrowGui()
+    print"Waiting for arrow gui"
     repeat wait()until ArrowGui():FindFirstChild(Side)
+    print("Waiting for "..Side.." side to load")
     local Arrows = ArrowGui()[Side]
     repeat wait()until #Arrows:WaitForChild'Notes':children()>0
+    print"Waiting for notes folder"
     repeat wait()until FakeContainer(Side)and Arrows.Notes and #Arrows.Notes:children()>0
+    print"Waiting until game starts"
     local Keys = _G.Controls[#Arrows.Notes:children()]
     local Y = FakeContainer(Side).Down.AbsolutePosition.Y
     for i,v in pairs(Arrows.Notes:children())do
