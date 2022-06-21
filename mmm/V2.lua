@@ -117,7 +117,7 @@ local Init = function(Side)
     for i,v in pairs(Arrows.Notes:children())do
         if ScrollType(Side)=="Downscroll"then
             v.ChildAdded:Connect(function(_)
-                print"Waiting until note can be hit"
+                print("Waiting until ".._.AbsolutePosition.Y.." >= "..Y,'uwuware.flags.ap: '..uwuware.flags.ap)
                 repeat task.wait() until _.AbsolutePosition.Y>=Y
                 if uwuware.flags.AP then
                     game:GetService'VirtualInputManager':SendKeyEvent(true,Enum.KeyCode[Keys[_.Parent.Name]],false,nil)
@@ -128,7 +128,7 @@ local Init = function(Side)
             end)
         else
             v.ChildAdded:Connect(function(_)
-                print"Waiting until note can be hit"
+                print("Waiting until ".._.AbsolutePosition.Y.." <= "..Y,'uwuware.flags.ap: '..uwuware.flags.ap)
                 repeat task.wait() until _.AbsolutePosition.Y<=Y
                 if uwuware.flags.AP then
                     game:GetService'VirtualInputManager':SendKeyEvent(true,Enum.KeyCode[Keys[_.Parent.Name]],false,nil)
