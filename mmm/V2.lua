@@ -111,10 +111,13 @@ local Init = function(Side)
     repeat wait()until FakeContainer(Side)and Arrows.Notes and #Arrows.Notes:children()>0
     print"Waiting until game starts"
     local Keys = _G.Controls[#Arrows.Notes:children()]
+    print"added keys"
     local Y = FakeContainer(Side).Down.AbsolutePosition.Y
+    print"loaded note Y position"
     for i,v in pairs(Arrows.Notes:children())do
         if ScrollType(Side)=="Downscroll"then
             v.ChildAdded:Connect(function(_)
+                print"Waiting until note can be hit"
                 repeat task.wait() until _.AbsolutePosition.Y>=Y
                 if uwuware.flags.AP then
                     game:GetService'VirtualInputManager':SendKeyEvent(true,Enum.KeyCode[Keys[_.Parent.Name]],false,nil)
@@ -125,23 +128,14 @@ local Init = function(Side)
             end)
         else
             v.ChildAdded:Connect(function(_)
-                repeat task.wait() until _.AbsolutePosition.Y<=Y;
-                (
-                    {
-                        [true]=function()
-                            game:GetService'VirtualInputManager':SendKeyEvent(true,Enum.KeyCode[Keys[_.Parent.Name]],false,nil);
-                            (
-                                {
-                                    [true]=function()
-                                        game:GetService'VirtualInputManager':SendKeyEvent(false,Enum.KeyCode[Keys[_.Parent.Name]],false,nil);
-                                    end;
-                                    [false]=function()end;
-                                }
-                            )[#Arrows.LongNotes[_.Parent.Name]:children()==0]();
-                        end;
-                        [false]=function()end;
-                    }
-                )[uwuware.flags.AP]();
+                print"Waiting until note can be hit"
+                repeat task.wait() until _.AbsolutePosition.Y<=Y
+                if uwuware.flags.AP then
+                    game:GetService'VirtualInputManager':SendKeyEvent(true,Enum.KeyCode[Keys[_.Parent.Name]],false,nil)
+                    if #Arrows.LongNotes[_.Parent.Name]:children()==0 then 
+                        game:GetService'VirtualInputManager':SendKeyEvent(false,Enum.KeyCode[Keys[_.Parent.Name]],false,nil)
+                    end
+                end
             end)
         end
     end
