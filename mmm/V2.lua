@@ -115,7 +115,9 @@ local Init = function(Side)
     local Y = FakeContainer(Side).Down.AbsolutePosition.Y
     print"loaded note Y position"
     for i,v in pairs(Arrows.Notes:children())do
+    print'in pairs'
         if ScrollType(Side)=="Downscroll"then
+        print'if'
             v.ChildAdded:Connect(function(_)
                 print("Waiting until ".._.AbsolutePosition.Y.." >= "..Y,'uwuware.flags.ap: '..uwuware.flags.ap)
                 repeat task.wait() until _.AbsolutePosition.Y>=Y
@@ -127,6 +129,7 @@ local Init = function(Side)
                 end
             end)
         else
+          print'else'
             v.ChildAdded:Connect(function(_)
                 print("Waiting until ".._.AbsolutePosition.Y.." <= "..Y,'uwuware.flags.ap: '..uwuware.flags.ap)
                 repeat task.wait() until _.AbsolutePosition.Y<=Y
