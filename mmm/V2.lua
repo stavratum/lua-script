@@ -139,6 +139,7 @@ local Init = function(Side)
             end)
         end
     end
+  print(#Arrows.Notes:children'')
     for i,v in pairs(ArrowGui()[Side].LongNotes:children())do
         if ScrollType(Side)=="Downscroll"then
             v.ChildAdded:Connect(function(sustainNote)
