@@ -101,11 +101,11 @@ local ScrollType = function(_)
   return nil
 end
 local Init = function(Side)
-    repeat wait()until ArrowGui()
+    repeat wait() until ArrowGui()
+    local ArrowGui = ArrowGui()
     print"Waiting for arrow gui"
-    repeat wait()until ArrowGui():FindFirstChild(Side)
-    print("Waiting for "..Side.." side to load")
-    local Arrows = ArrowGui()[Side]
+    repeat wait()until ArrowGui:FindFirstChild(Side)
+    local Arrows = ArrowGui[Side]
     repeat wait()until #Arrows:WaitForChild'Notes':children()>0
     print"Waiting for notes folder"
     repeat wait()until FakeContainer(Side)and Arrows.Notes and #Arrows.Notes:children()>0
@@ -115,9 +115,7 @@ local Init = function(Side)
     local Y = FakeContainer(Side).Down.AbsolutePosition.Y
     print"loaded note Y position"
     for i,v in pairs(Arrows.Notes:children())do
-    print'in pairs'
         if ScrollType(Side)=="Downscroll"then
-        print'if'
             v.ChildAdded:Connect(function(_)
                 print("Waiting until "..tostring(_.AbsolutePosition.Y).." >= ".. tostring(Y) .." uwuware.flags.ap: "..tostring(uwuware.flags.AP))
                 repeat task.wait() until _.AbsolutePosition.Y>=Y
@@ -129,7 +127,6 @@ local Init = function(Side)
                 end
             end)
         else
-          print'else'
             v.ChildAdded:Connect(function(_)
                 print("Waiting until "..tostring(_.AbsolutePosition.Y).." <= ".. tostring(Y) .." uwuware.flags.ap: "..tostring(uwuware.flags.AP))
                 repeat task.wait() until _.AbsolutePosition.Y<=Y
@@ -142,7 +139,6 @@ local Init = function(Side)
             end)
         end
     end
-  print(#Arrows.Notes:children'')
     for i,v in pairs(ArrowGui()[Side].LongNotes:children())do
         if ScrollType(Side)=="Downscroll"then
             v.ChildAdded:Connect(function(sustainNote)
