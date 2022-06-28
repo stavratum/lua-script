@@ -103,41 +103,38 @@ end
 local Init = function(Side)
     repeat wait() until ArrowGui()
     local ArrowGui = ArrowGui()
-    print"Waiting for arrow gui"
     repeat wait()until ArrowGui:FindFirstChild(Side)
     local Arrows = ArrowGui[Side]
     repeat wait()until #Arrows:WaitForChild'Notes':children()>0
-    print"Waiting for notes folder"
     repeat wait()until FakeContainer(Side)and Arrows.Notes and #Arrows.Notes:children()>0
-    print"Waiting until game starts"
     local Keys = _G.Controls[#Arrows.Notes:children()]
-    print"added keys"
     local Y = FakeContainer(Side).Down.AbsolutePosition.Y
-    print"loaded note Y position"
     for i,v in pairs(Arrows.Notes:children())do
         if ScrollType(Side)=="Downscroll"then
             v.ChildAdded:Connect(function(_)
+                local Key = _.Parent.Name
                 repeat task.wait() until _.AbsolutePosition.Y>=Y
                 if uwuware.flags.AP then
-                    game:GetService'VirtualInputManager':SendKeyEvent(true,Enum.KeyCode[Keys[_.Parent.Name]],false,nil)
-                    if #Arrows.LongNotes[_.Parent.Name]:children()==0 then 
+                    game:GetService'VirtualInputManager':SendKeyEvent(true,Enum.KeyCode[Keys[Key]],false,nil)
+                    if #Arrows.LongNotes[Key]:children()==0 then 
                         game:GetService'VirtualInputManager':SendKeyEvent(false,Enum.KeyCode[Keys[_.Parent.Name]],false,nil)
                     end
                 end
             end)
         else
             v.ChildAdded:Connect(function(_)
+                local Key = _.Parent.Name
                 repeat task.wait() until _.AbsolutePosition.Y<=Y
                 if uwuware.flags.AP then
-                    game:GetService'VirtualInputManager':SendKeyEvent(true,Enum.KeyCode[Keys[_.Parent.Name]],false,nil)
-                    if #Arrows.LongNotes[_.Parent.Name]:children()==0 then 
-                        game:GetService'VirtualInputManager':SendKeyEvent(false,Enum.KeyCode[Keys[_.Parent.Name]],false,nil)
+                    game:GetService'VirtualInputManager':SendKeyEvent(true,Enum.KeyCode[Keys[_.Parent.Key]],false,nil)
+                    if #Arrows.LongNotes[key]:children()==0 then 
+                        game:GetService'VirtualInputManager':SendKeyEvent(false,Enum.KeyCode[Keys[_.Parent.Key]],false,nil)
                     end
                 end
             end)
         end
     end
-    for i,v in pairs(ArrowGui:FindFirstChild(Side).LongNotes:children())do
+    for i,v in pairs(Arrows.LongNotes:children())do
       table.foreach(v:children'',function(inst)inst:Destroy()end)
         if ScrollType(Side)=="Downscroll"then
             v.ChildAdded:Connect(function(sustainNote)
