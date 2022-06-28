@@ -137,7 +137,7 @@ local Init = function(Side)
             end)
         end
     end
-    for i,v in pairs(ArrowGui()[Side].LongNotes:children())do
+    for i,v in pairs(ArrowGui:FindFirstChild(Side).LongNotes:children())do
       table.foreach(v:children'',function(inst)inst:Destroy()end)
         if ScrollType(Side)=="Downscroll"then
             v.ChildAdded:Connect(function(sustainNote)
