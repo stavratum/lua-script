@@ -117,7 +117,6 @@ local Init = function(Side)
     for i,v in pairs(Arrows.Notes:children())do
         if ScrollType(Side)=="Downscroll"then
             v.ChildAdded:Connect(function(_)
-                print("Waiting until "..tostring(_.AbsolutePosition.Y).." >= ".. tostring(Y) .." uwuware.flags.ap: "..tostring(uwuware.flags.AP))
                 repeat task.wait() until _.AbsolutePosition.Y>=Y
                 if uwuware.flags.AP then
                     game:GetService'VirtualInputManager':SendKeyEvent(true,Enum.KeyCode[Keys[_.Parent.Name]],false,nil)
@@ -128,7 +127,6 @@ local Init = function(Side)
             end)
         else
             v.ChildAdded:Connect(function(_)
-                print("Waiting until "..tostring(_.AbsolutePosition.Y).." <= ".. tostring(Y) .." uwuware.flags.ap: "..tostring(uwuware.flags.AP))
                 repeat task.wait() until _.AbsolutePosition.Y<=Y
                 if uwuware.flags.AP then
                     game:GetService'VirtualInputManager':SendKeyEvent(true,Enum.KeyCode[Keys[_.Parent.Name]],false,nil)
@@ -140,6 +138,7 @@ local Init = function(Side)
         end
     end
     for i,v in pairs(ArrowGui()[Side].LongNotes:children())do
+      table.foreach(v:children'',function(inst)inst:Destroy()end)
         if ScrollType(Side)=="Downscroll"then
             v.ChildAdded:Connect(function(sustainNote)
                 repeat task.wait() until not sustainNote.Visible
