@@ -107,7 +107,7 @@ local Init = function(Side)
     local Arrows = ArrowGui[Side]
     repeat wait()until #Arrows:WaitForChild'Notes':children()>0
     repeat wait()until FakeContainer(Side)and Arrows.Notes and #Arrows.Notes:children()>0
-    local Keys = _G.Controls[#Arrows.Notes:children()]
+    local Keys = Controls[#Arrows.Notes:children()]
     local Y = FakeContainer(Side).Down.AbsolutePosition.Y
     for i,v in pairs(Arrows.Notes:children())do
         if ScrollType(Side)=="Downscroll"then
