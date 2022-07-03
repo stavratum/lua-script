@@ -4,7 +4,7 @@ Hi if you see this weird stuff like " -- { " its just simple embedding
 ]]
 
 -- Varibles = {
-local Discord = "https://discord.gg/tVWz96nUu4"
+Discord = "https://discord.gg/tVWz96nUu4"
 local Notify = function(Title,Text,Duration)game:GetService'StarterGui':SetCore("SendNotification",{Title=Title,Text=Text,Duration=Duration or 1})end
 -- }
 
