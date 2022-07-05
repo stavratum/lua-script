@@ -1,1 +1,1 @@
-return 'Suck my dick mad adhd'
+return 'discord.gg/tVWz96nUu4'
