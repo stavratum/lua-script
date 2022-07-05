@@ -127,7 +127,7 @@ local Init = function(Side)
                 repeat task.wait() until _.AbsolutePosition.Y<=Y
                 if uwuware.flags.AP then
                     game:GetService'VirtualInputManager':SendKeyEvent(true,Enum.KeyCode[Keys[Key]],false,nil)
-                    if #Arrows.LongNotes[key]:children()==0 then 
+                    if #Arrows.LongNotes[Key]:children()==0 then 
                         game:GetService'VirtualInputManager':SendKeyEvent(false,Enum.KeyCode[Keys[Key]],false,nil)
                     end
                 end
