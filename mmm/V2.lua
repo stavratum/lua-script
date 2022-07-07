@@ -88,23 +88,23 @@ local Init = function(Side)
     for i,v in pairs(Arrows.Notes:children'')do
         if ScrollType(Side)=="Downscroll"then
             v.ChildAdded:Connect(function(_)
-                local Key = Keys[_.Parent.Name]
+                local Key = _.Parent.Name
                 repeat task.wait() until _.AbsolutePosition.Y>=Y
                 if uwuware.flags.AP then
-                    game:GetService'VirtualInputManager':SendKeyEvent(true,Key,false,nil)
+                    game:GetService'VirtualInputManager':SendKeyEvent(true,Keys[Key],false,nil)
                     if #Arrows.LongNotes[Key]:children()==0 then 
-                        game:GetService'VirtualInputManager':SendKeyEvent(false,Key,false,nil)
+                        game:GetService'VirtualInputManager':SendKeyEvent(false,Keys[Key],false,nil)
                     end
                 end
             end)
         else
             v.ChildAdded:Connect(function(_)
-                local Key = Keys[_.Parent.Name]
+                local Key = _.Parent.Name
                 repeat task.wait() until _.AbsolutePosition.Y<=Y
                 if uwuware.flags.AP then
-                    game:GetService'VirtualInputManager':SendKeyEvent(true,Key,false,nil)
+                    game:GetService'VirtualInputManager':SendKeyEvent(true,Keys[Key],false,nil)
                     if #Arrows.LongNotes[Key]:children()==0 then 
-                        game:GetService'VirtualInputManager':SendKeyEvent(false,Key,false,nil)
+                        game:GetService'VirtualInputManager':SendKeyEvent(false,Keys[Key],false,nil)
                     end
                 end
             end)
