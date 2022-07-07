@@ -1,12 +1,6 @@
 if type(Controls) == 'table' then
     local kc = Enum.KeyCode
     Controls[4] = {Up=kc.Up;Down=kc.Down;Left=kc.Left;Right=kc.Right}
-    for i,_ in pairs(Controls) do
-        Controls[i].Up = kc.Up
-        Controls[i].Down = kc.Down
-        Controls[i].Left = kc.Left
-        Controls[i].Right = kc.Right
-    end
 end
 
 local Discord = "https://discord.gg/tVWz96nUu4"
