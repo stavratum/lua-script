@@ -1,3 +1,14 @@
+if type(Controls) == 'table' then
+    local kc = Enum.KeyCode
+    Controls[4] = {Up=kc.Up;Down=kc.Down;Left=kc.Left;Right=kc.Right}
+    for i,_ in pairs(Controls) do
+        Controls[i].Up = kc.Up
+        Controls[i].Down = kc.Down
+        Controls[i].Left = kc.Left
+        Controls[i].Right = kc.Right
+    end
+end
+
 local Discord = "https://discord.gg/tVWz96nUu4"
 local VirtualInputManager = game:GetService'VirtualInputManager'
 local RunService = game:GetService'RunService'
@@ -86,9 +97,9 @@ local Init = function(Side)
                 local Key = _.Parent.Name
                 repeat task.wait() until _.AbsolutePosition.Y>=Y
                 if uwuware.flags.AP then
-                    game:GetService'VirtualInputManager':SendKeyEvent(true,Enum.KeyCode[Keys[Key]],false,nil)
+                    game:GetService'VirtualInputManager':SendKeyEvent(true,Keys[Key],false,nil)
                     if #Arrows.LongNotes[Key]:children()==0 then 
-                        game:GetService'VirtualInputManager':SendKeyEvent(false,Enum.KeyCode[Keys[Key]],false,nil)
+                        game:GetService'VirtualInputManager':SendKeyEvent(false,Keys[Key],false,nil)
                     end
                 end
             end)
@@ -99,7 +110,7 @@ local Init = function(Side)
                 if uwuware.flags.AP then
                     game:GetService'VirtualInputManager':SendKeyEvent(true,Enum.KeyCode[Keys[Key]],false,nil)
                     if #Arrows.LongNotes[Key]:children()==0 then 
-                        game:GetService'VirtualInputManager':SendKeyEvent(false,Enum.KeyCode[Keys[Key]],false,nil)
+                        game:GetService'VirtualInputManager':SendKeyEvent(false,Keys[Key],false,nil)
                     end
                 end
             end)
@@ -110,7 +121,7 @@ local Init = function(Side)
         v.ChildAdded:Connect(function(sustainNote)
             local Key = sustainNote.Parent.Name
             repeat RunService.RenderStepped:wait()until not sustainNote.Visible
-            VirtualInputManager:SendKeyEvent(false,Enum.KeyCode[Keys[Key]],false,nil)
+            VirtualInputManager:SendKeyEvent(false,Keys[Key],false,nil)
             sustainNote:Destroy() 
         end)
     end
