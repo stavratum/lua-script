@@ -1,8 +1,3 @@
-do
-    local kc = Enum.KeyCode
-    Controls[4] = {Up=kc.Up;Down=kc.Down;Left=kc.Left;Right=kc.Right}
-end
-
 local Discord = "https://discord.gg/tVWz96nUu4"
 local VirtualInputManager = game:GetService'VirtualInputManager'
 local RunService = game:GetService'RunService'
@@ -84,12 +79,22 @@ local Init = function(Side)
     local Arrows = ArrowGui[Side]
     repeat wait()until #Arrows:WaitForChild'Notes':children()>0
     repeat wait()until FakeContainer(Side)and Arrows.Notes and #Arrows.Notes:children()>0
-    local Keys = Controls[#Arrows.Notes:children'']
+    
+    local KeyBinds
+    for i,v in pairs(getgc()) do
+        if type(v)=='function' and getinfo(v).name == "_GetKeyBindFor" then
+            KeyBinds = getupvalues(v)[1].ExtraKeySettings
+            break
+        end
+    end 
+    KeyBinds['4'] = {UpKey=kc.Up;DownKey=kc.Down;LeftKey=kc.Left;RightKey=kc.Right}
+    local Keys = KeyBinds[tostring(#Arrows.Notes:children'')]
+    
     local Y = FakeContainer(Side).Down.AbsolutePosition.Y
     for i,v in pairs(Arrows.Notes:children'')do
         if ScrollType(Side)=="Downscroll"then
             v.ChildAdded:Connect(function(_)
-                local Key = _.Parent.Name
+                local Key = _.Parent.Name..'Key'
                 repeat task.wait() until _.AbsolutePosition.Y>=Y
                 if uwuware.flags.AP then
                     game:GetService'VirtualInputManager':SendKeyEvent(true,Keys[Key],false,nil)
@@ -100,7 +105,7 @@ local Init = function(Side)
             end)
         else
             v.ChildAdded:Connect(function(_)
-                local Key = _.Parent.Name
+                local Key = _.Parent.Name..'Key'
                 repeat task.wait() until _.AbsolutePosition.Y<=Y
                 if uwuware.flags.AP then
                     game:GetService'VirtualInputManager':SendKeyEvent(true,Keys[Key],false,nil)
@@ -114,9 +119,9 @@ local Init = function(Side)
     for i,v in pairs(Arrows.LongNotes:children())do
         table.foreach(v:children'',game.Destroy)
         v.ChildAdded:Connect(function(sustainNote)
-            local Key = Keys[sustainNote.Parent.Name]
+            local Key = sustainNote.Parent.Name..'Key'
             repeat RunService.RenderStepped:wait()until not sustainNote.Visible
-            VirtualInputManager:SendKeyEvent(false,Key,false,nil)
+            VirtualInputManager:SendKeyEvent(false,Keys[Key],false,nil)
             sustainNote:Destroy() 
         end)
     end
