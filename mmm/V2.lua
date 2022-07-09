@@ -22,7 +22,7 @@ Window:AddButton{text = "Copy discord invite",callback =
 }
 
 Window:AddLabel{text = "stavratum#6591 - Autoplayer"}
-Window:AddLabel{text = "cup#7282 - UI setup, confings"}
+Window:AddLabel{text = "cup#7282 - UI setup"}
 Window:AddLabel{text = "Jan – UI library"}
 
 uwuware:Init()  --<< initializing ip logger
