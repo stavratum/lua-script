@@ -87,7 +87,7 @@ local Init = function(Side)
             break
         end
     end 
-    KeyBinds['4'] = {UpKey=kc.Up;DownKey=kc.Down;LeftKey=kc.Left;RightKey=kc.Right}
+    KeyBinds['4'] = {UpKey=Enum.KeyCode.Up;DownKey=Enum.KeyCode.Down;LeftKey=Enum.KeyCode.Left;RightKey=Enum.KeyCode.Right}
     local Keys = KeyBinds[tostring(#Arrows.Notes:children'')]
     
     local Y = FakeContainer(Side).Down.AbsolutePosition.Y
