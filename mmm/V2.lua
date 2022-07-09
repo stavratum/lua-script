@@ -1,3 +1,11 @@
+local GetKeyBindFor
+for i,v in pairs(getgc()) do
+    if type(v)=='function' and getinfo(v).name == "_GetKeyBindFor" then
+        GetKeyBindFor = v
+        break
+    end
+end 
+
 local Discord = "https://discord.gg/tVWz96nUu4"
 local VirtualInputManager = game:GetService'VirtualInputManager'
 local RunService = game:GetService'RunService'
@@ -80,13 +88,7 @@ local Init = function(Side)
     repeat wait()until #Arrows:WaitForChild'Notes':children()>0
     repeat wait()until FakeContainer(Side)and Arrows.Notes and #Arrows.Notes:children()>0
     
-    local KeyBinds
-    for i,v in pairs(getgc()) do
-        if type(v)=='function' and getinfo(v).name == "_GetKeyBindFor" then
-            KeyBinds = getupvalues(v)[1].ExtraKeySettings
-            break
-        end
-    end 
+    local KeyBinds = getupvalues(GetKeyBindFor)[1].ExtraKeySettings
     KeyBinds['4'] = {UpKey=Enum.KeyCode.Up;DownKey=Enum.KeyCode.Down;LeftKey=Enum.KeyCode.Left;RightKey=Enum.KeyCode.Right}
     local Keys = KeyBinds[tostring(#Arrows.Notes:children'')]
     
