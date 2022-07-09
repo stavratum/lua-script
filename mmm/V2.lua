@@ -94,23 +94,23 @@ local Init = function(Side)
     for i,v in pairs(Arrows.Notes:children'')do
         if ScrollType(Side)=="Downscroll"then
             v.ChildAdded:Connect(function(_)
-                local Key = _.Parent.Name..'Key'
+                local Key = _.Parent.Name
                 repeat task.wait() until _.AbsolutePosition.Y>=Y
                 if uwuware.flags.AP then
-                    game:GetService'VirtualInputManager':SendKeyEvent(true,Keys[Key],false,nil)
+                    game:GetService'VirtualInputManager':SendKeyEvent(true,Keys[Key..'Key'],false,nil)
                     if #Arrows.LongNotes[Key]:children()==0 then 
-                        game:GetService'VirtualInputManager':SendKeyEvent(false,Keys[Key],false,nil)
+                        game:GetService'VirtualInputManager':SendKeyEvent(false,Keys[Key..'Key'],false,nil)
                     end
                 end
             end)
         else
             v.ChildAdded:Connect(function(_)
-                local Key = _.Parent.Name..'Key'
+                local Key = _.Parent.Name
                 repeat task.wait() until _.AbsolutePosition.Y<=Y
                 if uwuware.flags.AP then
-                    game:GetService'VirtualInputManager':SendKeyEvent(true,Keys[Key],false,nil)
+                    game:GetService'VirtualInputManager':SendKeyEvent(true,Keys[Key..'Key'],false,nil)
                     if #Arrows.LongNotes[Key]:children()==0 then 
-                        game:GetService'VirtualInputManager':SendKeyEvent(false,Keys[Key],false,nil)
+                        game:GetService'VirtualInputManager':SendKeyEvent(false,Keys[Key..'Key'],false,nil)
                     end
                 end
             end)
@@ -119,9 +119,9 @@ local Init = function(Side)
     for i,v in pairs(Arrows.LongNotes:children())do
         table.foreach(v:children'',game.Destroy)
         v.ChildAdded:Connect(function(sustainNote)
-            local Key = sustainNote.Parent.Name..'Key'
+            local Key = sustainNote.Parent.Name
             repeat RunService.RenderStepped:wait()until not sustainNote.Visible
-            VirtualInputManager:SendKeyEvent(false,Keys[Key],false,nil)
+            VirtualInputManager:SendKeyEvent(false,Keys[Key..'Key'],false,nil)
             sustainNote:Destroy() 
         end)
     end
