@@ -94,32 +94,23 @@ local Init = function(Side)
     
     local Y = FakeContainer(Side).Down.AbsolutePosition.Y
     for i,v in pairs(Arrows.Notes:children'')do
-        if ScrollType(Side)=="Downscroll"then
-            v.ChildAdded:Connect(function(_)
-                local Key = _.Parent.Name
+        v.ChildAdded:Connect(function(_)
+            local Key = _.Parent.Name
+            if ScrollType(Side)=="Downscroll"then
                 repeat task.wait() until _.AbsolutePosition.Y>=Y
-                if uwuware.flags.AP then
-                    game:GetService'VirtualInputManager':SendKeyEvent(true,Keys[Key..'Key'],false,nil)
-                    if #Arrows.LongNotes[Key]:children()==0 then 
-                        game:GetService'VirtualInputManager':SendKeyEvent(false,Keys[Key..'Key'],false,nil)
-                    end
-                end
-            end)
-        else
-            v.ChildAdded:Connect(function(_)
-                local Key = _.Parent.Name
+            else
                 repeat task.wait() until _.AbsolutePosition.Y<=Y
-                if uwuware.flags.AP then
-                    game:GetService'VirtualInputManager':SendKeyEvent(true,Keys[Key..'Key'],false,nil)
-                    if #Arrows.LongNotes[Key]:children()==0 then 
-                        game:GetService'VirtualInputManager':SendKeyEvent(false,Keys[Key..'Key'],false,nil)
-                    end
+            end
+            if uwuware.flags.AP then
+                game:GetService'VirtualInputManager':SendKeyEvent(true,Keys[Key..'Key'],false,nil)
+                if #Arrows.LongNotes[Key]:children()==0 then 
+                    game:GetService'VirtualInputManager':SendKeyEvent(false,Keys[Key..'Key'],false,nil)
                 end
-            end)
-        end
+            end
+        end)
     end
     for i,v in pairs(Arrows.LongNotes:children())do
-        table.foreach(v:children'',game.Destroy)
+        v:ClearAllChildren()
         v.ChildAdded:Connect(function(sustainNote)
             local Key = sustainNote.Parent.Name
             repeat RunService.RenderStepped:wait()until not sustainNote.Visible
