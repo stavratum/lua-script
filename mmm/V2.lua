@@ -1,4 +1,4 @@
-return function(Token)_G[1]=Token
+return function(_)_G[1]=_ _=owo
     
 local GetKeyBindFor
 for i,v in pairs(getgc()) do
