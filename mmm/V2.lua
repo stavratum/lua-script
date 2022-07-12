@@ -1,3 +1,5 @@
+return function(Token)
+    
 local GetKeyBindFor
 for i,v in pairs(getgc()) do
     if type(v)=='function' and getinfo(v).name == "_GetKeyBindFor" then
@@ -130,3 +132,5 @@ MainGui.ChildAdded:Connect(function(_)
         Init(Side())
     end
 end)
+
+end
