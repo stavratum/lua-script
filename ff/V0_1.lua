@@ -50,6 +50,7 @@ Connected[#Connected + 1] = GameUI.Arrows.DescendantAdded:Connect(function(Desce
                         VirtualInputManager:SendKeyEvent(false,Controls[Descendant.name],false,nil)
                     end
                 elseif _0.name == 'Note' then
+                    local Parent = _0.Parent
                     if ScrollDown then
                         repeat RunService.RenderStepped:Wait() until _0.AbsolutePosition.Y >= Y
                     else
@@ -57,7 +58,7 @@ Connected[#Connected + 1] = GameUI.Arrows.DescendantAdded:Connect(function(Desce
                     end
                     if uwu.flags.IsTim then
                         VirtualInputManager:SendKeyEvent(true,Controls[Descendant.name],false,nil)
-                        if not _0.Parent:FindFirstChild'Frame' then
+                        if not Parent:FindFirstChild'Frame' then
                             VirtualInputManager:SendKeyEvent(false,Controls[Descendant.name],false,nil)
                         end
                     end
