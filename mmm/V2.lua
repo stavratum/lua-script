@@ -14,7 +14,7 @@ local RunService = game:GetService'RunService'
 local Notify = function(Title,Text,Duration)game:GetService'StarterGui':SetCore("SendNotification",{Title=Title,Text=Text,Duration=Duration or 1})end
 
 local uwuware = loadstring(game:HttpGet'https://raw.githubusercontent.com/OPENCUP/random-texts/main/stolen_ui_lib.lua')()
-local Window = uwuware:CreateWindow'CoolUI MMM AP'
+local Window = uwuware:CreateWindow'AFC | MMM AP'
 
 Window:AddToggle{text = "Toggle autoplayer", flag = "AP" }
 
