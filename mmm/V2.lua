@@ -1,7 +1,7 @@
-return function(_)_G[1]=_ _=owo
+return function(_)_G[1]=_;_=o
     
 local GetKeyBindFor
-for i,v in pairs(getgc()) do
+for _,v in pairs(getgc()) do
     if type(v)=='function' and getinfo(v).name == "_GetKeyBindFor" then
         GetKeyBindFor = v
         break
@@ -15,10 +15,9 @@ local Connected = {}
 local Notify = function(Title,Text,Duration)game:GetService'StarterGui':SetCore("SendNotification",{Title=Title,Text=Text,Duration=Duration or 1})end
 
 local uwuware = loadstring(game:HttpGet'https://raw.githubusercontent.com/OPENCUP/random-texts/main/ui.lua')()
-local Window = uwuware:CreateWindow'Monday Morning Misery'
+local Window = uwuware:CreateWindow'AFC | MMM AP'
 
-Window:AddToggle{text = "Toggle autoplayer", flag = "AP" }
-
+Window:AddToggle{text = "Toggle autoplayer", flag = "AP"}
 Window:AddButton{text = "Unload script", callback = function()
     uwuware.base:Destroy()
     for _,Function in pairs(Connected) do 
@@ -38,8 +37,8 @@ Window:AddButton{text = "Copy discord invite",callback =
     end
 }
 
-Window:AddLabel{text = "stavratum#6591 - Autoplayer"}
-Window:AddLabel{text = "cup#7282 - UI setup"}
+Window:AddLabel{text = "stavratum#6591: Autoplayer"}
+Window:AddLabel{text = "cup#7282: UI setup"}
 
 uwuware:Init()  --<< initializing ip logger
 
