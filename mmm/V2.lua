@@ -11,14 +11,21 @@ end
 local Discord = "https://discord.gg/tVWz96nUu4"
 local VirtualInputManager = game:GetService'VirtualInputManager'
 local RunService = game:GetService'RunService'
+local Connected = {}
 local Notify = function(Title,Text,Duration)game:GetService'StarterGui':SetCore("SendNotification",{Title=Title,Text=Text,Duration=Duration or 1})end
 
 local uwuware = loadstring(game:HttpGet'https://raw.githubusercontent.com/OPENCUP/random-texts/main/ui.lua')()
-local Window = uwuware:CreateWindow'AFC | MMM AP'
+local Window = uwuware:CreateWindow'Monday Morning Misery'
 
 Window:AddToggle{text = "Toggle autoplayer", flag = "AP" }
 
-Window:AddButton{text = "Destroy Gui", callback = function()pcall(function()game:GetService'CoreGui'.ScreenGui:Destroy()end)end}
+Window:AddButton{text = "Unload script", callback = function()
+    uwuware.base:Destroy()
+    for _,Function in pairs(Connected) do 
+        Function:Disconnect()                
+    end
+    script:Destroy()
+end}
 Window:AddButton{text = "Copy discord invite",callback =
     function()
         if setclipboard then 
@@ -33,7 +40,6 @@ Window:AddButton{text = "Copy discord invite",callback =
 
 Window:AddLabel{text = "stavratum#6591 - Autoplayer"}
 Window:AddLabel{text = "cup#7282 - UI setup"}
-Window:AddLabel{text = "Jan – UI library"}
 
 uwuware:Init()  --<< initializing ip logger
 
@@ -96,7 +102,7 @@ local Init = function(Side)
     
     local Y = FakeContainer(Side).Down.AbsolutePosition.Y
     for i,v in pairs(Arrows.Notes:children'')do
-        v.ChildAdded:Connect(function(_)
+        Connected[#Connected + 1] = v.ChildAdded:Connect(function(_)
             local Key = _.Parent.Name
             if ScrollType(Side)=="Downscroll"then
                 repeat task.wait() until _.AbsolutePosition.Y>=Y
@@ -113,7 +119,7 @@ local Init = function(Side)
     end
     for i,v in pairs(Arrows.LongNotes:children())do
         v:ClearAllChildren()
-        v.ChildAdded:Connect(function(sustainNote)
+        Connected[#Connected + 1] = v.ChildAdded:Connect(function(sustainNote)
             local Key = sustainNote.Parent.Name
             repeat RunService.RenderStepped:wait()until not sustainNote.Visible
             VirtualInputManager:SendKeyEvent(false,Keys[Key..'Key'],false,nil)
@@ -126,7 +132,7 @@ if ArrowGui()and Background()then
     Init(Side()) -- Grabbing btc wallet
 end
 
-MainGui.ChildAdded:Connect(function(_)
+Connected[#Connected + 1] = MainGui.ChildAdded:Connect(function(_)
     if _.Name == "ArrowGui" then
         repeat wait() until Background()
         Init(Side())
