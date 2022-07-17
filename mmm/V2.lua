@@ -93,7 +93,7 @@ local Side,Y,IsDownscroll
 local Notes = {}
 
 local function BypassVirginity(_)
-    _.Parent:WaitForChild'Background'
+    while not Side do wait() end
     
     local Holders = _[Side].Notes
     local LongNotes = _[Side].LongNotes
