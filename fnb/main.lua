@@ -25,7 +25,7 @@ end
 local uwuware = loadstring(game:HttpGet'https://raw.githubusercontent.com/wally-rblx/uwuware-ui/main/main.lua')()
 local Window = uwuware:CreateWindow"Friday Night Bloxxin'"
 Window:AddSlider{text="Offset (ms)",flag = "ms",min = -75, max = 75,value = 0}
-Window:AddToggle{text="Toggle Autoplayer",flag = "yes"}
+Window:AddToggle{text="Toggle Autoplayer",flag = "yes",state = true}
 Window:AddButton{text="Instant Solo",callback=function()Client.PlayerGui:WaitForChild'SingleplayerUI'.ButtonPressed:FireServer()end}
 
 Window:AddButton{text="Unload Script",callback=function()
