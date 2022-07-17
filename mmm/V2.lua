@@ -6,8 +6,9 @@ local Connected = {}
 
 local uwuware = loadstring(game:HttpGet'https://raw.githubusercontent.com/OPENCUP/random-texts/main/ui.lua')()
 local Window = uwuware:CreateWindow'AFC | MMM AP'
---[[
+
 Window:AddToggle{text = 'Toggle autoplayer',flag = 'yes',state = true}
+    --[[
 Window:AddSlider{text = '% Sick',flag = 'Sick',min = 0,max = 100,value = 100}
 Window:AddSlider{text = '% Good',flag = 'Good',min = 0,max = 100,value = 100}
 Window:AddSlider{text = '% Ok',flag = 'Ok',min = 0,max = 100,value = 100}
