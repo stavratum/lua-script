@@ -1,10 +1,5 @@
-return function(_)_G[1]=_;_=o
+return function(_)_G[1]=_;_=o  -- Initializing virginity losing script (by tim)
     
---[[
-    I rewrote it again bruh
-    idk when I will add configurations
-]]
-
 local _s = tostring
 local Notify = function(Title,Text,Duration)game:GetService'StarterGui':SetCore("SendNotification",{Title=Title,Text=Text,Duration=Duration or 1})end
 local Connected = {}
@@ -12,6 +7,11 @@ local Connected = {}
 local uwuware = loadstring(game:HttpGet'https://raw.githubusercontent.com/OPENCUP/random-texts/main/ui.lua')()
 local Window = uwuware:CreateWindow'AFC | MMM AP'
 Window:AddToggle{text = 'Toggle autoplayer',flag = 'yes',state = true}
+Window:AddSlider{text = '% Sick',flag = 'Sick',min = 0,max = 100,value = 100}
+Window:AddSlider{text = '% Good',flag = 'Good',min = 0,max = 100,value = 100}
+Window:AddSlider{text = '% Ok',flag = 'Ok',min = 0,max = 100,value = 100}
+Window:AddSlider{text = '% Bad',flag = 'Bad',min = 0,max = 100,value = 100}
+Window:AddSlider{text = '% Miss',flag = 'Miss',min = 0,max = 100,value = 100}
 Window:AddButton{text = 'Unload script',
     callback = function()
         uwuware.base:Destroy()
@@ -45,6 +45,40 @@ for _,v in pairs(getgc()) do
         FUNCTION = v
         break
     end
+end
+local Judgements = {
+    Sick = 0;
+    Good = 2;
+    Ok = 3;
+    Bad = 4;
+    Miss = 5;
+}
+function SkiddedFromWally()
+    local chances = {
+        {'Sick';uwuware.flags.Sick},
+        {'Good';uwuware.flags.Good},
+        {'Ok';uwuware.flags.Ok},
+        {'Bad';uwuware.flags.Bad},
+        {'Miss';uwuware.flags.Miss},
+    }
+    table.sort(chances,function(_0,_1)return _0[2]>_1[2]end)
+    
+    local timsweight = 0;
+    for _,v in pairs(chances) do
+        timsweight += v[2]
+    end
+
+    local initialWeight = math.random(0, timsweight)
+    local weight = 0;
+
+    for _,v in pairs(chances) do
+        weight += v[2]
+        if weight > initialWeight then
+            return v[1]
+        end
+    end
+
+    return 'Sick'
 end
 
 local VirtualInputManager = game:GetService'VirtualInputManager'
@@ -119,8 +153,9 @@ Connected[#Connected + 1] = RunService.Heartbeat:Connect(
         for Note,Input in pairs(Notes) do
             coroutine.wrap(
                 function()
-                    if IsDownscroll and Note.AbsolutePosition.Y <= Y
-                    or not IsDownscroll and Note.AbsolutePosition.Y >= Y then
+                    local ma = Judgements[SkiddedFromWally()]
+                    if IsDownscroll and Note.AbsolutePosition.Y + ma <= Y
+                    or not IsDownscroll and Note.AbsolutePosition.Y - ma >= Y then
                         Notes[Note] = nil
                         if uwuware.flags.yes then
                             VirtualInputManager:SendKeyEvent(true,Input.Key,false,nil)
@@ -135,7 +170,7 @@ Connected[#Connected + 1] = RunService.Heartbeat:Connect(
     end
 )
 
-uwuware:Init() -- << Initializing virginity looser V2.0 (by tim)
+uwuware:Init()
 
 for ni,gg in pairs(Client.PlayerGui.ScreenGui:GetDescendants()) do
     if _s(gg) == 'ArrowGui' then
@@ -143,4 +178,4 @@ for ni,gg in pairs(Client.PlayerGui.ScreenGui:GetDescendants()) do
     end
 end
 
-end
+end 
