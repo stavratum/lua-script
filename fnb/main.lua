@@ -115,8 +115,8 @@ local Autoplay = function(Child)
             function(Arrow)
                 local ModuleScript = Arrow:FindFirstChildOfClass'ModuleScript'
                 if not Arrow.HellNote.Value or Arrow.HellNote.Value and _require(ModuleScript).Type ~= 'OnHit' and not GimmickNotes then
-                    --[[local Y = Arrows[Holder.name].AbsolutePosition.Y
                     local Input = Keys[Holder.name]
+                    --[[local Y = Arrows[Holder.name].AbsolutePosition.Y
                     
                     if Y > Client:GetMouse().ViewSizeY / 2 then
                         repeat RunService.Hearbeat:Wait() until Y >= Arrow.AbsolutePosition.Y
