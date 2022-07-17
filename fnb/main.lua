@@ -1,5 +1,4 @@
 local _,fnb_devs = loadstring(game:HttpGet'https://raw.githubusercontent.com/stavratum/lua-script/main/fnb/_.lua')()
-table.foreach(fnb_devs,print)
 
 if not game:IsLoaded() then game.Loaded:Wait() end
 
