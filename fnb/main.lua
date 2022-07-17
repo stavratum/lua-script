@@ -24,6 +24,7 @@ end
 
 local uwuware = loadstring(game:HttpGet'https://raw.githubusercontent.com/wally-rblx/uwuware-ui/main/main.lua')()
 local Window = uwuware:CreateWindow"Friday Night Bloxxin'"
+Window:AddSlider{text="Offset (ms)",flag = "ms",min = -75, max = 75,value = 0}
 Window:AddToggle{text="Toggle Autoplayer",flag = "yes"}
 Window:AddButton{text="Instant Solo",callback=function()Client.PlayerGui:WaitForChild'SingleplayerUI'.ButtonPressed:FireServer()end}
 
@@ -114,14 +115,15 @@ local Autoplay = function(Child)
             function(Arrow)
                 local ModuleScript = Arrow:FindFirstChildOfClass'ModuleScript'
                 if not Arrow.HellNote.Value or Arrow.HellNote.Value and _require(ModuleScript).Type ~= 'OnHit' and not GimmickNotes then
-                    local Y = Arrows[Holder.name].AbsolutePosition.Y
+                    --[[local Y = Arrows[Holder.name].AbsolutePosition.Y
                     local Input = Keys[Holder.name]
                     
                     if Y > Client:GetMouse().ViewSizeY / 2 then
                         repeat RunService.Hearbeat:Wait() until Y >= Arrow.AbsolutePosition.Y
                     else
                         repeat RunService.Heartbeat:Wait() until Y <= Y <= Arrow.AbsolutePosition.Y
-                    end
+                    end]]
+                    task.wait(.4 + math.floor(uwuware.flags.ms)/1000) --like this for now im lazy
               
                     if uwuware.flags.yes then
                         VirtualInputManager:SendKeyEvent(true,Input,false,nil)
