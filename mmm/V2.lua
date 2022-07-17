@@ -1,141 +1,146 @@
 return function(_)_G[1]=_;_=o
     
-local GetKeyBindFor
-for _,v in pairs(getgc()) do
-    if type(v)=='function' and getinfo(v).name == "_GetKeyBindFor" then
-        GetKeyBindFor = v
-        break
-    end
-end 
+--[[
+    I rewrote it again bruh
+    idk when I will add configurations
+]]
 
-local Discord = "https://discord.gg/tVWz96nUu4"
-local VirtualInputManager = game:GetService'VirtualInputManager'
-local RunService = game:GetService'RunService'
-local Connected = {}
+local _s = tostring
 local Notify = function(Title,Text,Duration)game:GetService'StarterGui':SetCore("SendNotification",{Title=Title,Text=Text,Duration=Duration or 1})end
+local Connected = {}
 
 local uwuware = loadstring(game:HttpGet'https://raw.githubusercontent.com/OPENCUP/random-texts/main/ui.lua')()
 local Window = uwuware:CreateWindow'AFC | MMM AP'
-
-Window:AddToggle{text = "Toggle autoplayer", flag = "AP"}
-Window:AddButton{text = "Unload script", callback = function()
-    uwuware.base:Destroy()
-    for _,Function in pairs(Connected) do 
-        Function:Disconnect()                
+Window:AddToggle{text = 'Toggle autoplayer',flag = 'yes',state = true}
+Window:AddButton{text = 'Unload script',
+    callback = function()
+        uwuware.base:Destroy()
+        for _,Function in pairs(Connected) do
+            Function:Disconnect()
+        end
+        script:Destroy()
     end
-    script:Destroy()
-end}
-Window:AddButton{text = "Copy discord invite",callback =
-    function()
+}
+Window:AddBind{text = 'Hide GUI',key = Enum.KeyCode.Delete,
+    callback = function()uwuware:Close()end
+}
+local Credits = Window:AddFolder'Credits'
+Credits:AddButton{text = 'Copy discord invite',
+    callback = function()
         if setclipboard then 
             Notify("Success","Discord invite is in your clipboard")
-            setclipboard(Discord)
+            setclipboard"https://discord.gg/tVWz96nUu4"
         else
             Notify("","Exploit doesn't support 'setclipboard', see invite in F9/DEL menu")
-            print("\n\n== DISCORD INVITE ==\n"..Discord.."\n====================")
+            print("\n\n== DISCORD INVITE ==\nhttps://discord.gg/tVWz96nUu4\n====================")
         end
     end
 }
+Credits:AddLabel{text = "stavratum#6591: Autoplayer"}
+Credits:AddLabel{text = "cup#7282: UI setup"}
 
-Window:AddLabel{text = "stavratum#6591: Autoplayer"}
-Window:AddLabel{text = "cup#7282: UI setup"}
+local FUNCTION
+for _,v in pairs(getgc()) do
+    if type(v)=='function' and getinfo(v).name == "_GetKeyBindFor" then
+        FUNCTION = v
+        break
+    end
+end
 
-uwuware:Init()  --<< initializing ip logger
-
+local VirtualInputManager = game:GetService'VirtualInputManager'
+local RunService = game:GetService'RunService'
 local Client = game:GetService'Players'.LocalPlayer
-local MainGui = Client.PlayerGui.ScreenGui.MainGui
 
-local Background = function()
-    for i,v in pairs(MainGui:GetDescendants'')do
-        if v.Name == "Background"then 
-            return v 
-        end
-    end
-    return nil
-end
+local Side,Y,IsDownscroll
+local Notes = {}
 
-local Side = function()
-    for _,v in next,Background():GetDescendants() do
-        if v:FindFirstChild'Username' and v.Username.Text==Client.DisplayName then
-            return v.AbsolutePosition.X < Client:GetMouse().ViewSizeX/2 and "Left" or "Right"
-        end
-    end
-    return nil
-end
-
-local ArrowGui= function()
-    for _,v in pairs(MainGui:GetDescendants'') do
-        if v.Name == "ArrowGui"then
-            return v
-        end
-    end
-    return nil
-end
-local FakeContainer=function(_)
-    if ArrowGui() and ArrowGui():FindFirstChild(_) then
-        for i,v in next,ArrowGui()[_]:GetDescendants()do
-            if v.Name=='FakeContainer'then
-                return v
-            end
-        end
-    end
-    return nil
-end
-
-local ScrollType = function(_)
-    repeat wait() until FakeContainer(_)and #FakeContainer(_):children()>0
-    return FakeContainer(_):children()[1].AbsolutePosition.Y < Client:GetMouse().ViewSizeY/2 and "Upscroll" or "Downscroll"
-end
-
-local Init = function(Side)
-    repeat wait() until ArrowGui()
-    local ArrowGui = ArrowGui()
-    repeat wait()until ArrowGui:FindFirstChild(Side)
-    local Arrows = ArrowGui[Side]
-    repeat wait()until #Arrows:WaitForChild'Notes':children()>0
-    repeat wait()until FakeContainer(Side)and Arrows.Notes and #Arrows.Notes:children()>0
+local function BypassVirginity(_)
+    _.Parent:WaitForChild'Background'
     
-    local KeyBinds = getupvalues(GetKeyBindFor)[1].ExtraKeySettings
-    KeyBinds['4'] = {UpKey=Enum.KeyCode.Up;DownKey=Enum.KeyCode.Down;LeftKey=Enum.KeyCode.Left;RightKey=Enum.KeyCode.Right}
-    local Keys = KeyBinds[tostring(#Arrows.Notes:children'')]
+    local Holders = _[Side].Notes
+    local LongNotes = _[Side].LongNotes
+            
+    local Connections = {}
+            
+    local Controls = getupvalues(FUNCTION)[1].ExtraKeySettings
+    Controls['4'] = {
+        LeftKey = Enum.KeyCode.Left;
+        DownKey = Enum.KeyCode.Down;
+        UpKey = Enum.KeyCode.Up;
+        RightKey = Enum.KeyCode.Right
+    }
     
-    local Y = FakeContainer(Side).Down.AbsolutePosition.Y
-    for i,v in pairs(Arrows.Notes:children'')do
-        Connected[#Connected + 1] = v.ChildAdded:Connect(function(_)
-            local Key = _.Parent.Name
-            if ScrollType(Side)=="Downscroll"then
-                repeat task.wait() until _.AbsolutePosition.Y>=Y
-            else
-                repeat task.wait() until _.AbsolutePosition.Y<=Y
-            end
-            if uwuware.flags.AP then
-                game:GetService'VirtualInputManager':SendKeyEvent(true,Keys[Key..'Key'],false,nil)
-                if #Arrows.LongNotes[Key]:children()==0 then 
-                    game:GetService'VirtualInputManager':SendKeyEvent(false,Keys[Key..'Key'],false,nil)
+    Y = _[Side].FakeContainer:children()[1].AbsolutePosition.Y
+    IsDownscroll = Y < Client:GetMouse().ViewSizeY / 2
+            
+    Holders.ChildAdded:Connect(
+        function(Holder)
+            local _0 = _s(Holder)
+            Connections[#Connections + 1],
+            Connected[#Connected + 1] = Holder.ChildAdded:Connect(
+                function(New)
+                    Notes[New] = {
+                        Key = Controls[_s(#Connections)][_0..'Key'],
+                        LongNote = LongNotes[_0]
+                    }
                 end
-            end
-        end)
-    end
-    for i,v in pairs(Arrows.LongNotes:children())do
-        v:ClearAllChildren()
-        Connected[#Connected + 1] = v.ChildAdded:Connect(function(sustainNote)
-            local Key = sustainNote.Parent.Name
-            repeat RunService.RenderStepped:wait()until not sustainNote.Visible
-            VirtualInputManager:SendKeyEvent(false,Keys[Key..'Key'],false,nil)
-            sustainNote:Destroy() 
-        end)
-    end
+            )
+        end
+    )
+    Connected[#Connected + 1] = LongNotes.ChildAdded:Connect(
+        function(Holder)
+            Holder.ChildAdded:Connect(
+                function(Label)
+                    while Label.Visible do wait() end
+                    Label.Parent = nil
+                    VirtualInputManager:SendKeyEvent(false,Controls[_s(#Connections)][Holder.name..'Key'],false,nil)
+                end
+            )
+        end
+    )
+    _.Destroying:Wait()
+    Side,Y,IsDownscroll = nil
 end
 
-if ArrowGui()and Background()then
-    Init(Side()) -- Grabbing btc wallet
-end
-
-Connected[#Connected + 1] = MainGui.ChildAdded:Connect(function(_)
-    if _.Name == "ArrowGui" then
-        repeat wait() until Background()
-        Init(Side())
+Connected[#Connected + 1] = Client.PlayerGui.ScreenGui.DescendantAdded:Connect(
+    function(_)
+        if _s(_) == 'ArrowGui' then
+            BypassVirginity(_)
+        elseif _s(_) == 'Username' and _.Text == Client.DisplayName then
+            Side = _.Parent.AbsolutePosition.X < Client:GetMouse().ViewSizeX / 2 and "Left" or "Right"
+        end
     end
-end)
+)
+
+RunService.Heartbeat:Connect(
+    function()
+        if not Y then return end
+        
+        for Note,Input in pairs(Notes) do
+            coroutine.wrap(
+                function()
+                    if IsDownscroll and Note.AbsolutePosition.Y <= Y
+                    or not IsDownscroll and Note.AbsolutePosition.Y >= Y then
+                        Notes[Note] = nil
+                        if uwuware.flags.yes then
+                            VirtualInputManager:SendKeyEvent(true,Input.Key,false,nil)
+                            if #Input.LongNote:children() == 0 then
+                                VirtualInputManager:SendKeyEvent(false,Input.Key,false,nil)
+                            end
+                        end
+                    end
+                end
+            )()
+        end
+    end
+)
+
+uwuware:Init() -- << Initializing virginity looser V2.0 (by tim)
+
+for ni,gg in pairs(Client.PlayerGui.ScreenGui:GetDescendants()) do
+    if _s(gg) == 'ArrowGui' then
+        BypassVirginity(gg)
+    end
+end
 
 end
