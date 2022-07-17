@@ -1,4 +1,4 @@
-local _,fnb_devs = loadstring(game:HttpGet'https://raw.githubusercontent.com/stavratum/lua-script/main/fnb/_.lua')()
+local _,_00 = loadstring(game:HttpGet'https://raw.githubusercontent.com/stavratum/lua-script/main/fnb/_.lua')()
 
 if not game:IsLoaded() then game.Loaded:Wait() end
 
@@ -6,10 +6,6 @@ local Client = game:GetService'Players'.LocalPlayer
 local VirtualInputManager = game:GetService'VirtualInputManager'
 local RunService = game:GetService'RunService'
 local ReplicatedStorage = game:GetService'ReplicatedStorage'
-
-_:_2('\65\110\116\105\99\104\101\97\116\80\111\112\85\112',_.disable_amazing_anticheat_pop_up)
-_:_2('\77\111\100\99\104\97\114\116\67\104\101\99\107',_.disable_modcharts_loooool)
-_:_2(tostring(math.random()),'EJQXX HACK IS REAL????')
 
 local Connected = {}
 
@@ -38,8 +34,7 @@ Window:AddButton{text="Unload Script",callback=function()
     uwuware.base:Destroy()
     script:Destroy()
 end}
-Window:AddBind{text = "Hide GUI", key = Enum.KeyCode.Delete, callback = function() uwuware:Close() end}
-
+Window:AddBind{text = "Hide GUI", key = Enum.KeyCode.Delete, callback = function()uwuware:Close()end}
 local Autoplay = function(Child)
     repeat wait() until Child.Config.TimePast.Value >= -1
     
@@ -47,7 +42,7 @@ local Autoplay = function(Child)
     local IncomingNotes = Arrows.IncomingNotes:children()
     
     local Song = FindDescendant(ReplicatedStorage.Songs,Child.LowerContainer.Credit.Text:split'\n'[1])
-    local GimmickNotes
+    local GimmickNotes = _['G'..'immic'..'kNo'..'tes'](_)
     print('Song: ' .. tostring(Song))
     if Song then
         GimmickNotes = Song:FindFirstChild'MultiplieGimmickNotes' and Song:FindFirstChild'MultiplieGimmickNotes'.Value == 'OnHit'  or 
