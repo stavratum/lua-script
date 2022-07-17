@@ -12,6 +12,9 @@ Window:AddSlider{text = '% Good',flag = 'Good',min = 0,max = 100,value = 100}
 Window:AddSlider{text = '% Ok',flag = 'Ok',min = 0,max = 100,value = 100}
 Window:AddSlider{text = '% Bad',flag = 'Bad',min = 0,max = 100,value = 100}
 Window:AddSlider{text = '% Miss',flag = 'Miss',min = 0,max = 100,value = 100}
+Window:AddBind{text = 'Hide GUI',key = Enum.KeyCode.Delete,
+    callback = function()uwuware:Close()end
+}
 Window:AddButton{text = 'Unload script',
     callback = function()
         uwuware.base:Destroy()
@@ -20,9 +23,6 @@ Window:AddButton{text = 'Unload script',
         end
         script:Destroy()
     end
-}
-Window:AddBind{text = 'Hide GUI',key = Enum.KeyCode.Delete,
-    callback = function()uwuware:Close()end
 }
 local Credits = Window:AddFolder'Credits'
 Credits:AddButton{text = 'Copy discord invite',
