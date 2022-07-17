@@ -6,12 +6,13 @@ local Connected = {}
 
 local uwuware = loadstring(game:HttpGet'https://raw.githubusercontent.com/OPENCUP/random-texts/main/ui.lua')()
 local Window = uwuware:CreateWindow'AFC | MMM AP'
+--[[
 Window:AddToggle{text = 'Toggle autoplayer',flag = 'yes',state = true}
 Window:AddSlider{text = '% Sick',flag = 'Sick',min = 0,max = 100,value = 100}
 Window:AddSlider{text = '% Good',flag = 'Good',min = 0,max = 100,value = 100}
 Window:AddSlider{text = '% Ok',flag = 'Ok',min = 0,max = 100,value = 100}
 Window:AddSlider{text = '% Bad',flag = 'Bad',min = 0,max = 100,value = 100}
-Window:AddSlider{text = '% Miss',flag = 'Miss',min = 0,max = 100,value = 100}
+Window:AddSlider{text = '% Miss',flag = 'Miss',min = 0,max = 100,value = 100}]]
 Window:AddBind{text = 'Hide GUI',key = Enum.KeyCode.Delete,
     callback = function()uwuware:Close()end
 }
@@ -46,6 +47,7 @@ for _,v in pairs(getgc()) do
         break
     end
 end
+                    --[[
 local Judgements = {
     Sick = 0;
     Good = 2;
@@ -80,7 +82,7 @@ function SkiddedFromWally()
 
     return 'Sick'
 end
-
+]]
 local VirtualInputManager = game:GetService'VirtualInputManager'
 local RunService = game:GetService'RunService'
 local Client = game:GetService'Players'.LocalPlayer
@@ -153,7 +155,7 @@ Connected[#Connected + 1] = RunService.Heartbeat:Connect(
         for Note,Input in pairs(Notes) do
             coroutine.wrap(
                 function()
-                    local ma = Judgements[SkiddedFromWally()]
+                    local ma = 0 -- Judgements[SkiddedFromWally()]
                     if IsDownscroll and Note.AbsolutePosition.Y + ma <= Y
                     or not IsDownscroll and Note.AbsolutePosition.Y - ma >= Y then
                         Notes[Note] = nil
