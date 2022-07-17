@@ -1,1 +1,1 @@
-return 'gg/tVWz96nUu4'
+return 'discord.gg/8MfgRxGPzd'
