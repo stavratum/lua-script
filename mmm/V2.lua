@@ -1,4 +1,4 @@
-return function(_)_G[1]=_;_=o  -- Initializing virginity losing script (by tim)
+return function(_)_G[1]=_  -- Initializing virginity losing script (by tim)
     
 local _s = tostring
 local Notify = function(Title,Text,Duration)game:GetService'StarterGui':SetCore("SendNotification",{Title=Title,Text=Text,Duration=Duration or 1})end
