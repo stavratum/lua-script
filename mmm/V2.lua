@@ -1,4 +1,5 @@
-return function(Token)_G[1]=Token  -- Initializing virginity losing script (by tim)
+return function(Token)
+_G[1] = Token -- Initializing virginity losing plugin (by tim)
     
 local _s = tostring
 local Notify = function(Title,Text,Duration)game:GetService'StarterGui':SetCore("SendNotification",{Title=Title,Text=Text,Duration=Duration or 1})end
@@ -144,7 +145,7 @@ Connected[#Connected + 1] = Client.PlayerGui.ScreenGui.DescendantAdded:Connect(
         if _s(D) == 'ArrowGui' then
             BypassVirginity(D)
         elseif _s(D) == 'Username' and D.Text == Client.DisplayName then
-            if D.AbsolutePosition.X < Client:GetMouse().ViewSizeX / 2
+            if D.AbsolutePosition.X < Client:GetMouse().ViewSizeX / 2 then
                 Side = "Left"
             else
                 Side = "Right"
