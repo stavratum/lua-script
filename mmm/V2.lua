@@ -112,7 +112,7 @@ Connected[#Connected + 1] = Client.PlayerGui.ScreenGui.DescendantAdded:Connect(
     end
 )
 
-RunService.Heartbeat:Connect(
+Connected[#Connected + 1] = RunService.Heartbeat:Connect(
     function()
         if not Y then return end
         
