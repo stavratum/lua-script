@@ -145,6 +145,7 @@ Connected[#Connected + 1] = Client.PlayerGui.ScreenGui.DescendantAdded:Connect(
         if _s(D) == 'ArrowGui' then
             BypassVirginity(D)
         elseif _s(D) == 'Username' and D.Text == Client.DisplayName then
+                                    print(D.AbsolutePosition.X)
             if D.AbsolutePosition.X < Client:GetMouse().ViewSizeX / 2 then
                 Side = "Left"
             else
