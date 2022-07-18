@@ -48,6 +48,7 @@ local Autoplay = function(Child)
     if Song then
         GimmickNotes = Song:FindFirstChild'MultiplieGimmickNotes' and Song:FindFirstChild'MultiplieGimmickNotes'.Value == 'OnHit'  or 
         Song:FindFirstChildOfClass'ModuleScript' and Song:FindFirstChildOfClass'ModuleScript':FindFirstChild'GimmickNotes'
+        or Song:FindFirstChild'GimmickNotes'
     end
     GimmickNotes = GimmickNotes and GimmickNotes.Value or nil
     
@@ -114,7 +115,7 @@ local Autoplay = function(Child)
         Connected[#Connected + 1] = Holder.ChildAdded:Connect(
             function(Arrow)
                 local ModuleScript = Arrow:FindFirstChildOfClass'ModuleScript'
-                if not Arrow.HellNote.Value or Arrow.HellNote.Value and _require(ModuleScript).Type ~= 'OnHit' and not GimmickNotes then
+                if not Arrow.HellNote.Value or Arrow.HellNote.Value and _require(ModuleScript).Type ~= 'OnHit' and not GimmickNotes or not GimmickNotes == 'OnHit' then
                     local Input = Keys[Holder.name]
                     --[[local Y = Arrows[Holder.name].AbsolutePosition.Y
                     
