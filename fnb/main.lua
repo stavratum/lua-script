@@ -37,7 +37,7 @@ Window:AddButton{text="Unload Script",callback=function()
 end}
 Window:AddBind{text = "Hide GUI", key = Enum.KeyCode.Delete, callback = function()uwuware:Close()end}
 local Autoplay = function(Child)
-    repeat wait() until Child.Config.TimePast.Value >= -1
+    repeat wait() until Child.Config.TimePast.Value >= -.5
     
     local Arrows = Child.Game[Child.PlayerSide.Value].Arrows
     local IncomingNotes = Arrows.IncomingNotes:children()
