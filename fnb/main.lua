@@ -36,14 +36,14 @@ Window:AddButton{text="Unload Script",callback=function()
     script:Destroy()
 end}
 Window:AddBind{text = "Hide GUI", key = Enum.KeyCode.Delete, callback = function()uwuware:Close()end}
-local Autoplay = function(Child)
-    repeat wait() until Child.Config.TimePast.Value >= 0
+local Init = function(Child)
+    repeat wait() until Child.Config.TimePast.Value >= -1
     
     local Arrows = Child.Game[Child.PlayerSide.Value].Arrows
     local IncomingNotes = Arrows.IncomingNotes:children()
     
     local Song = FindDescendant(ReplicatedStorage.Songs,Child.LowerContainer.Credit.Text:split'\n'[1]:split' ('[1])
-    local GimmickNotes = _['G'..'immic'..'kNo'..'tes'](_)
+    local GimmickNotes = _:GimmickNotes()
     print('Song: ' .. tostring(Song))
     if Song then
         GimmickNotes = Song:FindFirstChild'MultiplieGimmickNotes' and Song:FindFirstChild'MultiplieGimmickNotes'.Value == 'OnHit'  or 
@@ -115,7 +115,7 @@ local Autoplay = function(Child)
         Connected[#Connected + 1] = Holder.ChildAdded:Connect(
             function(Arrow)
                 local ModuleScript = Arrow:FindFirstChildOfClass'ModuleScript'
-                if not Arrow.HellNote.Value or Arrow.HellNote.Value and _require(ModuleScript).Type ~= 'OnHit' and not GimmickNotes or not GimmickNotes == 'OnHit' then
+                if not Arrow.HellNote.Value or Arrow.HellNote.Value and _require(ModuleScript).Type ~= 'OnHit' and GimmickNotes ~= 'OnHit' then
                     local Input = Keys[Holder.name]
                     --[[local Y = Arrows[Holder.name].AbsolutePosition.Y
                     
@@ -128,7 +128,7 @@ local Autoplay = function(Child)
               
                     if uwuware.flags.yes then
                         VirtualInputManager:SendKeyEvent(true,Input,false,nil)
-                        repeat RunService.RenderStepped:Wait() until not Arrow or not Arrow:FindFirstChild'Frame' or Arrow.Frame.Bar.Size.Y.Scale <= 0.3
+                        repeat task.wait() until not Arrow or not Arrow:FindFirstChild'Frame' or Arrow.Frame.Bar.Size.Y.Scale <= 0.4
                         VirtualInputManager:SendKeyEvent(false,Input,false,nil)
                     end
                 end
@@ -141,7 +141,7 @@ Connected[#Connected + 1] =
 Client.PlayerGui.ChildAdded:Connect(
     function(Child)
         if Child.name == 'FNFEngine' then 
-            Autoplay(Child)
+            Init(Child)
         end
     end
 )
@@ -153,7 +153,7 @@ for i,v in pairs(game:GetService"Workspace":GetDescendants()) do
 end
 
 if Client.PlayerGui:FindFirstChild'FNFEngine' then
-    Autoplay(Client.PlayerGui.FNFEngine)
+    Init(Client.PlayerGui.FNFEngine)
 end
 
 uwuware:Init()
