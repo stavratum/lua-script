@@ -110,28 +110,30 @@ local Init = function(Child)
     Keybinds,KeyCode = nil
     
     for _,Holder in pairs(IncomingNotes) do
-        Connected[#Connected + 1] = Holder.ChildAdded:Connect(
-            function(Arrow)
-                local ModuleScript = Arrow:FindFirstChildOfClass'ModuleScript'
-                if not Arrow.HellNote.Value or Arrow.HellNote.Value and _require(ModuleScript).Type ~= 'OnHit' and GimmickNotes ~= 'OnHit' then
-                    local Input = Keys[Holder.name]
-                    --[[local Y = Arrows[Holder.name].AbsolutePosition.Y
-                    
-                    if Y > Client:GetMouse().ViewSizeY / 2 then
-                        repeat RunService.Hearbeat:Wait() until Y >= Arrow.AbsolutePosition.Y
-                    else
-                        repeat RunService.Heartbeat:Wait() until Y <= Y <= Arrow.AbsolutePosition.Y
-                    end]]
-                    task.wait(.4 + math.floor(uwuware.flags.ms)/1000) --like this for now im lazy
-              
-                    if uwuware.flags.yes then
-                        VirtualInputManager:SendKeyEvent(true,Input,false,nil)
-                        repeat task.wait() until not Arrow or not Arrow:FindFirstChild'Frame' or Arrow.Frame.Bar.Size.Y.Scale <= 0.4
-                        VirtualInputManager:SendKeyEvent(false,Input,false,nil)
+        task.spawn(function()
+            Connected[#Connected + 1] = Holder.ChildAdded:Connect(
+                function(Arrow)
+                    local ModuleScript = Arrow:FindFirstChildOfClass'ModuleScript'
+                    if not Arrow.HellNote.Value or Arrow.HellNote.Value and _require(ModuleScript).Type ~= 'OnHit' and GimmickNotes ~= 'OnHit' then
+                        local Input = Keys[Holder.name]
+                        --[[local Y = Arrows[Holder.name].AbsolutePosition.Y
+
+                        if Y > Client:GetMouse().ViewSizeY / 2 then
+                            repeat RunService.Hearbeat:Wait() until Y >= Arrow.AbsolutePosition.Y
+                        else
+                            repeat RunService.Heartbeat:Wait() until Y <= Y <= Arrow.AbsolutePosition.Y
+                        end]]
+                        task.wait(.4 + math.floor(uwuware.flags.ms)/1000) --like this for now im lazy
+
+                        if uwuware.flags.yes then
+                            VirtualInputManager:SendKeyEvent(true,Input,false,nil)
+                            repeat task.wait() until not Arrow or not Arrow:FindFirstChild'Frame' or Arrow.Frame.Bar.Size.Y.Scale <= 0.4
+                            VirtualInputManager:SendKeyEvent(false,Input,false,nil)
+                        end
                     end
                 end
-            end
-        )
+            )
+        end)
     end
 end
 
