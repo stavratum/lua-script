@@ -41,7 +41,7 @@ local Init = function(Child)
     local IncomingNotes = Arrows.IncomingNotes:children()
     
     local Song = FindDescendant(ReplicatedStorage.Songs,Child.LowerContainer.Credit.Text:split'\n'[1]:split' ('[1])
-    local GimmickNotes = _:GimmickNotes()
+    local GimmickNotes
     print('Song: ' .. tostring(Song))
     if Song then
         GimmickNotes = Song:FindFirstChild'MultiplieGimmickNotes' and Song:FindFirstChild'MultiplieGimmickNotes'.Value == 'OnHit'  or 
