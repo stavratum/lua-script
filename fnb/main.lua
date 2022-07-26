@@ -33,8 +33,9 @@ Window:AddButton{text="Unload Script",callback=function()
     uwuware.base:Destroy()
     script:Destroy()
 end}
-Window:AddBind{text = "Hide GUI", key = Enum.KeyCode.Delete, callback = function()uwuware:Close()end}
+Window:AddBind{text = "Close GUI", key = Enum.KeyCode.Delete, callback = function()uwuware:Close()end}
 local Init = function(Child)
+    wait(1)
     repeat wait() until Child.Config.TimePast.Value >= -1
     
     local Arrows = Child.Game[Child.PlayerSide.Value].Arrows
@@ -110,19 +111,12 @@ local Init = function(Child)
     Keybinds,KeyCode = nil
     
     for _,Holder in pairs(IncomingNotes) do
-        task.spawn(function()
-            Connected[#Connected + 1] = Holder.ChildAdded:Connect(
-                function(Arrow)
+        Connected[#Connected + 1] = Holder.ChildAdded:Connect(
+            function(Arrow)
+                task.spawn(function()
                     local ModuleScript = Arrow:FindFirstChildOfClass'ModuleScript'
                     if not Arrow.HellNote.Value or Arrow.HellNote.Value and _require(ModuleScript).Type ~= 'OnHit' and GimmickNotes ~= 'OnHit' then
                         local Input = Keys[Holder.name]
-                        --[[local Y = Arrows[Holder.name].AbsolutePosition.Y
-
-                        if Y > Client:GetMouse().ViewSizeY / 2 then
-                            repeat RunService.Hearbeat:Wait() until Y >= Arrow.AbsolutePosition.Y
-                        else
-                            repeat RunService.Heartbeat:Wait() until Y <= Y <= Arrow.AbsolutePosition.Y
-                        end]]
                         task.wait(.4 + math.floor(uwuware.flags.ms)/1000) --like this for now im lazy
 
                         if uwuware.flags.yes then
@@ -131,9 +125,9 @@ local Init = function(Child)
                             VirtualInputManager:SendKeyEvent(false,Input,false,nil)
                         end
                     end
-                end
-            )
-        end)
+                end)
+            end
+        )
     end
 end
 
