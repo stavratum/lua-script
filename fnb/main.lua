@@ -1,11 +1,12 @@
 if not game:IsLoaded() then game.Loaded:Wait() end
 
+local uwuware = loadstring(game:HttpGet'https://raw.githubusercontent.com/stavratum/lua-script/main/fnb/uwuware_edit.lua')()
+local Maid = loadstring(game:HttpGet'https://raw.githubusercontent.com/Quenty/NevermoreEngine/version2/Modules/Shared/Events/Maid.lua')().new()
+
 local Client = game:GetService'Players'.LocalPlayer
 local VirtualInputManager = game:GetService'VirtualInputManager'
 local RunService = game:GetService'RunService'
 local ReplicatedStorage = game:GetService'ReplicatedStorage'
-
-local Connected = {}
 
 local function _require(_)
     return _ and require(_) or {}
@@ -20,20 +21,19 @@ local function FindDescendant(Inst,Excepted)
     return nil
 end
 
-local uwuware = loadstring(game:HttpGet'https://raw.githubusercontent.com/stavratum/lua-script/main/fnb/uwuware_edit.lua')()
 local Window = uwuware:CreateWindow"Friday Night Bloxxin'"
 Window:AddSlider{text="Offset (ms)",flag = "ms",min = -75, max = 75,value = 0}
 Window:AddToggle{text="Toggle Autoplayer",flag = "yes",state = true}
 Window:AddButton{text="Instant Solo",callback=function()Client.PlayerGui:WaitForChild'SingleplayerUI'.ButtonPressed:FireServer()end}
 
 Window:AddButton{text="Unload Script",callback=function()
-    for _,Function in pairs(Connected) do
-        Function:Disconnect()
-    end
+    Maid:DoCleaning()
     uwuware.base:Destroy()
     script:Destroy()
 end}
 Window:AddBind{text = "Close GUI", key = Enum.KeyCode.Delete, callback = function()uwuware:Close()end}
+uwuware:Init()
+
 local Init = function(Child)
     wait(1)
     repeat wait() until Child.Config.TimePast.Value >= -1
@@ -111,27 +111,27 @@ local Init = function(Child)
     Keybinds,KeyCode = nil
     
     for _,Holder in pairs(IncomingNotes) do
-        Connected[#Connected + 1] = Holder.ChildAdded:Connect(
-            function(Arrow)
-                task.spawn(function()
+        Maid:GiveTask(
+            Holder.ChildAdded:Connect(
+                function(Arrow)
                     local ModuleScript = Arrow:FindFirstChildOfClass'ModuleScript'
                     if not Arrow.HellNote.Value or Arrow.HellNote.Value and _require(ModuleScript).Type ~= 'OnHit' and GimmickNotes ~= 'OnHit' then
                         local Input = Keys[Holder.name]
                         task.wait(.4 + math.floor(uwuware.flags.ms)/1000) --like this for now im lazy
-
                         if uwuware.flags.yes then
                             VirtualInputManager:SendKeyEvent(true,Input,false,nil)
                             repeat task.wait() until not Arrow or not Arrow:FindFirstChild'Frame' or Arrow.Frame.Bar.Size.Y.Scale <= 0.4
                             VirtualInputManager:SendKeyEvent(false,Input,false,nil)
                         end
                     end
-                end)
-            end
+                end
+            )
         )
     end
+    Child.Destroying:Wait()
+    Maid:DoCleaning()
 end
 
-Connected[#Connected + 1] =
 Client.PlayerGui.ChildAdded:Connect(
     function(Child)
         if Child.name == 'FNFEngine' then 
@@ -149,6 +149,3 @@ end
 if Client.PlayerGui:FindFirstChild'FNFEngine' then
     Init(Client.PlayerGui.FNFEngine)
 end
-
-uwuware:Init()
-uwuware.cursor.Visible = false
