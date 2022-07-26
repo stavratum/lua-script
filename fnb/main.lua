@@ -1,5 +1,3 @@
-local _,_00 = loadstring(game:HttpGet'https://raw.githubusercontent.com/stavratum/lua-script/main/fnb/_.lua')()
-
 if not game:IsLoaded() then game.Loaded:Wait() end
 
 local Client = game:GetService'Players'.LocalPlayer
@@ -22,7 +20,7 @@ local function FindDescendant(Inst,Excepted)
     return nil
 end
 
-local uwuware = loadstring(game:HttpGet'https://raw.githubusercontent.com/wally-rblx/uwuware-ui/main/main.lua')()
+local uwuware = loadstring(game:HttpGet'https://raw.githubusercontent.com/stavratum/lua-script/main/fnb/uwuware_edit.lua')()
 local Window = uwuware:CreateWindow"Friday Night Bloxxin'"
 Window:AddSlider{text="Offset (ms)",flag = "ms",min = -75, max = 75,value = 0}
 Window:AddToggle{text="Toggle Autoplayer",flag = "yes",state = true}
