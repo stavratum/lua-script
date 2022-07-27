@@ -8,6 +8,8 @@ local VirtualInputManager = game:GetService'VirtualInputManager'
 local RunService = game:GetService'RunService'
 local ReplicatedStorage = game:GetService'ReplicatedStorage'
 
+local ChildAdded
+
 local function _require(_)
     return _ and require(_) or {}
 end
@@ -27,7 +29,9 @@ Window:AddToggle{text="Toggle Autoplayer",flag = "yes",state = true}
 Window:AddButton{text="Instant Solo",callback=function()Client.PlayerGui:WaitForChild'SingleplayerUI'.ButtonPressed:FireServer()end}
 
 Window:AddButton{text="Unload Script",callback=function()
+    ChildAdded:Disconnect()
     Maid:DoCleaning()
+        
     uwuware.base:Destroy()
     script:Destroy()
 end}
@@ -132,7 +136,7 @@ local Init = function(Child)
     Maid:DoCleaning()
 end
 
-Client.PlayerGui.ChildAdded:Connect(
+ChildAdded = Client.PlayerGui.ChildAdded:Connect(
     function(Child)
         if Child.name == 'FNFEngine' then 
             Init(Child)
