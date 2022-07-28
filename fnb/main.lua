@@ -10,8 +10,8 @@ local ReplicatedStorage = game:GetService'ReplicatedStorage'
 
 local ChildAdded
 
-local function _require(_)
-    return _ and require(_) or {}
+local function IsOnHit(_)
+    return _ and require(_).Type == 'OnHit' or false
 end
 
 local function FindDescendant(Inst,Excepted)
@@ -53,64 +53,37 @@ local Init = function(Child)
         Song:FindFirstChildOfClass'ModuleScript' and Song:FindFirstChildOfClass'ModuleScript':FindFirstChild'GimmickNotes'
         or Song:FindFirstChild'GimmickNotes'
     end
-    GimmickNotes = GimmickNotes and GimmickNotes.Value or nil
+    GimmickNotes = GimmickNotes and GimmickNotes.Value == 'OnHit' or nil
     
     local Keybinds,KeyCode = Client.Input.Keybinds,Enum.KeyCode
-    local Keys = (
-        {
-            [4] = {
-                Left = KeyCode[Keybinds.Left.Value],
-                Down = KeyCode[Keybinds.Down.Value],
-                Up = KeyCode[Keybinds.Up.Value],
-                Right = KeyCode[Keybinds.Right.Value]
-            },
-            [5] = {
-                Left = KeyCode[Keybinds.Left.Value],
-                Down = KeyCode[Keybinds.Down.Value],
-                Space = KeyCode[Keybinds.Space.Value],
-                Up = KeyCode[Keybinds.Up.Value],
-                Right = KeyCode[Keybinds.Right.Value]
-            },
-            [6] = {
-                S = KeyCode[Keybinds.L3.Value],
-                D = KeyCode[Keybinds.L2.Value],
-                F = KeyCode[Keybinds.L1.Value],
-                J = KeyCode[Keybinds.R1.Value],
-                K = KeyCode[Keybinds.R2.Value],
-                L = KeyCode[Keybinds.R3.Value],
-            },
-            [7] = {
-                S = KeyCode[Keybinds.L3.Value],
-                D = KeyCode[Keybinds.L2.Value],
-                F = KeyCode[Keybinds.L1.Value],
-                Space = KeyCode[Keybinds.Space.Value],
-                J = KeyCode[Keybinds.R1.Value],
-                K = KeyCode[Keybinds.R2.Value],
-                L = KeyCode[Keybinds.R3.Value]
-            },
-            [8] = {
-                A = KeyCode[Keybinds.L4.Value],
-                S = KeyCode[Keybinds.L3.Value],
-                D = KeyCode[Keybinds.L2.Value],
-                F = KeyCode[Keybinds.L1.Value],
-                H = KeyCode[Keybinds.R1.Value],
-                J = KeyCode[Keybinds.R2.Value],
-                K = KeyCode[Keybinds.R3.Value],
-                L = KeyCode[Keybinds.R4.Value]
-            },
-            [9] = {
-                A = KeyCode[Keybinds.L4.Value],
-                S = KeyCode[Keybinds.L3.Value],
-                D = KeyCode[Keybinds.L2.Value],
-                F = KeyCode[Keybinds.L1.Value],
-                Space = KeyCode[Keybinds.Space.Value],
-                H = KeyCode[Keybinds.R1.Value],
-                J = KeyCode[Keybinds.R2.Value],
-                K = KeyCode[Keybinds.R3.Value],
-                L = KeyCode[Keybinds.R4.Value]
-            }
+    local Keys = {
+        [5] = {
+            Left = KeyCode[Keybinds.Left.Value],
+            Down = KeyCode[Keybinds.Down.Value],
+            Up = KeyCode[Keybinds.Up.Value],
+            Right = KeyCode[Keybinds.Right.Value]
+        },
+        [7] = {
+            S = KeyCode[Keybinds.L3.Value],
+            D = KeyCode[Keybinds.L2.Value],
+            F = KeyCode[Keybinds.L1.Value],
+            J = KeyCode[Keybinds.R1.Value],
+            K = KeyCode[Keybinds.R2.Value],
+            L = KeyCode[Keybinds.R3.Value]
+        },
+        [9] = {
+            A = KeyCode[Keybinds.L4.Value],
+            S = KeyCode[Keybinds.L3.Value],
+            D = KeyCode[Keybinds.L2.Value],
+            F = KeyCode[Keybinds.L1.Value],
+            H = KeyCode[Keybinds.R1.Value],
+            J = KeyCode[Keybinds.R2.Value],
+            K = KeyCode[Keybinds.R3.Value],
+            L = KeyCode[Keybinds.R4.Value ~= ';' and Keybinds.R4.Value or 'Semicolon'] -- I am so amazing at hardcode
         }
-    )[#IncomingNotes]
+    }
+    Keys = Keys[#IncomingNotes] or Keys[#IncomingNotes + 1]
+    Keys.Space = KeyCode[Keybinds.Space.Value]
     
     Keybinds,KeyCode = nil
     
@@ -118,16 +91,18 @@ local Init = function(Child)
         Maid:GiveTask(
             Holder.ChildAdded:Connect(
                 function(Arrow)
-                    local ModuleScript = Arrow:FindFirstChildOfClass'ModuleScript'
-                    if not Arrow.HellNote.Value or Arrow.HellNote.Value and _require(ModuleScript).Type ~= 'OnHit' and GimmickNotes ~= 'OnHit' then
-                        local Input = Keys[Holder.name]
-                        task.wait(.4 + math.floor(uwuware.flags.ms)/1000) --like this for now im lazy
-                        if uwuware.flags.yes then
-                            VirtualInputManager:SendKeyEvent(true,Input,false,nil)
-                            repeat task.wait() until not Arrow or not Arrow:FindFirstChild'Frame' or Arrow.Frame.Bar.Size.Y.Scale <= 0.4
-                            VirtualInputManager:SendKeyEvent(false,Input,false,nil)
-                        end
-                    end
+                    if Arrow.HellNote.Value
+                    or IsOnHit(Arrow:FindFirstChildOfClass'ModuleScript')
+                    and GimmickNotes then return end
+                    
+                    local Input = Keys[Holder.name]
+                    task.wait(.4 + math.floor(uwuware.flags.ms)/1000) --like this for now im lazy
+                    
+                    if not uwuware.flags.yes then return end
+                        
+                    VirtualInputManager:SendKeyEvent(true,Input,false,nil)
+                    repeat task.wait() until not Arrow or not Arrow:FindFirstChild'Frame' or Arrow.Frame.Bar.Size.Y.Scale <= .35
+                    VirtualInputManager:SendKeyEvent(false,Input,false,nil)
                 end
             )
         )
@@ -138,9 +113,8 @@ end
 
 ChildAdded = Client.PlayerGui.ChildAdded:Connect(
     function(Child)
-        if Child.name == 'FNFEngine' then 
-            Init(Child)
-        end
+        if Child.name ~= 'FNFEngine' then return end 
+        Init(Child)
     end
 )
 
