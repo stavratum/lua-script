@@ -57,13 +57,13 @@ local Init = function(Child)
     
     local Keybinds,KeyCode = Client.Input.Keybinds,Enum.KeyCode
     local Keys = {
-        [5] = {
+        [4] = {
             Left = KeyCode[Keybinds.Left.Value],
             Down = KeyCode[Keybinds.Down.Value],
             Up = KeyCode[Keybinds.Up.Value],
             Right = KeyCode[Keybinds.Right.Value]
         },
-        [7] = {
+        [6] = {
             S = KeyCode[Keybinds.L3.Value],
             D = KeyCode[Keybinds.L2.Value],
             F = KeyCode[Keybinds.L1.Value],
@@ -71,7 +71,7 @@ local Init = function(Child)
             K = KeyCode[Keybinds.R2.Value],
             L = KeyCode[Keybinds.R3.Value]
         },
-        [9] = {
+        [8] = {
             A = KeyCode[Keybinds.L4.Value],
             S = KeyCode[Keybinds.L3.Value],
             D = KeyCode[Keybinds.L2.Value],
@@ -82,7 +82,7 @@ local Init = function(Child)
             L = KeyCode[Keybinds.R4.Value ~= ';' and Keybinds.R4.Value or 'Semicolon'] -- I am so amazing at hardcode
         }
     }
-    Keys = Keys[#IncomingNotes] or Keys[#IncomingNotes + 1]
+    Keys = Keys[#IncomingNotes] or Keys[#IncomingNotes - 1]
     Keys.Space = KeyCode[Keybinds.Space.Value]
     
     Keybinds,KeyCode = nil
