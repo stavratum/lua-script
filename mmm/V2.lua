@@ -41,14 +41,6 @@ Credits:AddButton{text = 'Copy discord invite',
 }
 Credits:AddLabel{text = "stavratum#6591: Autoplayer"}
 Credits:AddLabel{text = "cup#7282: UI setup"}
-
-local FUNCTION
-for _,v in pairs(getgc()) do
-    if type(v)=='function' and getinfo(v).name == "_GetKeyBindFor" then
-        FUNCTION = v
-        break
-    end
-end
                     --[[
 local Judgements = {
     Sick = 0;
@@ -100,7 +92,7 @@ local function BypassVirginity(_)
             
     local Connections = {}
             
-    local Controls = getupvalues(FUNCTION)[1].ExtraKeySettings
+    local Controls = getrenv()._G.PlayerData.Options.ExtraKeySettings
     Controls['4'] = {
         LeftKey = Enum.KeyCode.Left;
         DownKey = Enum.KeyCode.Down;
